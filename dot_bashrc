@@ -1,3 +1,10 @@
+# ____    _    ____  _   _ ____   ____
+#| __ )  / \  / ___|| | | |  _ \ / ___|
+#|  _ \ / _ \ \___ \| |_| | |_) | |
+#| |_) / ___ \ ___) |  _  |  _ <| |___
+#|____/_/   \_\____/|_| |_|_| \_\\____|
+#
+
 #!/bin/bash
 iatest=$(expr index "$-" i)
 
@@ -7,14 +14,14 @@ iatest=$(expr index "$-" i)
 
 # Source global definitions
 if [ -f /etc/bash.bashrc ]; then
-	. /etc/bash.bashrc
+  . /etc/bash.bashrc
 fi
 
 # Enable bash programmable completion features in interactive shells
 if [ -f /usr/share/bash-completion/bash_completion ]; then
-	. /usr/share/bash-completion/bash_completion
+  . /usr/share/bash-completion/bash_completion
 elif [ -f /etc/bash_completion ]; then
-	. /etc/bash_completion
+  . /etc/bash_completion
 fi
 
 # Alias definitions.
@@ -23,12 +30,12 @@ fi
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 if [ -f ~/.bash_aliases ]; then
-	. ~/.bash_aliases
+  . ~/.bash_aliases
 fi
 
 # Read Process Shell functions.
 if [ -f ~/.bash_functions ]; then
-	. ~/.bash_functions
+  . ~/.bash_functions
 fi
 
 #######################################################
@@ -65,11 +72,11 @@ if [[ $iatest -gt 0 ]]; then bind "set show-all-if-ambiguous On"; fi
 # Set the default editor
 export EDITOR=nvim
 export VISUAL=nvim
-alias pico='edit'
-alias spico='sedit'
-alias nano='edit'
-alias snano='sedit'
-alias vim='nvim'
+# alias pico='edit'
+# alias spico='sedit'
+# alias nano='edit'
+# alias snano='sedit'
+alias vi='nvim'
 alias cat='bat'
 
 # To have colors for ls and all grep commands such as grep, egrep and zgrep
@@ -94,11 +101,11 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 #Autojump
 
 if [ -f "/usr/share/autojump/autojump.sh" ]; then
-	. /usr/share/autojump/autojump.sh
+  . /usr/share/autojump/autojump.sh
 elif [ -f "/usr/share/autojump/autojump.bash" ]; then
-	. /usr/share/autojump/autojump.bash
+  . /usr/share/autojump/autojump.bash
 else
-	echo "Can't find the Autojump script"
+  echo "Can't find the Autojump script"
 fi
 
 # Initialize node version manager (nvm)
@@ -110,6 +117,9 @@ eval "$(fnm env --use-on-cd --log-level=quiet)"
 # Switch between bash and zsh
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
 alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
+
+# Set Bash Preexec
+[[ -f /usr/share/bash-preexec/bash-preexec.sh ]] && source /usr/share/bash-preexec/bash-preexec.sh
 
 #######################################################
 # Set the ultimate amazing command prompt
@@ -128,8 +138,8 @@ neofetch
 date
 
 bashexit() {
-	echo -e "\n\e[1mExiting! Good Bye!\e[0m\n"
-	sleep 0.5
+  echo -e "\n\e[1mExiting! Good Bye!\e[0m\n"
+  sleep 0.5
 }
 
 # End MOTD
