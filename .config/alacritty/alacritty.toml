@@ -1,0 +1,45 @@
+[general]
+## Import additional configuration files.
+# import = ["/home/iqbal/.config/alacritty/colors.toml", "/home/iqbal/.config/alacritty/fonts.toml"]
+import = ["/home/iqbal/.config/alacritty/themes/themes/gruvbox_material_hard_dark.toml", "/home/iqbal/.config/alacritty/fonts.toml"]
+
+## You can set shell.program to the path of your favorite shell, e.g. /bin/zsh.
+## Entries in shell.args are passed as arguments to the shell.
+#shell = { program = "/bin/zsh", args = ["--login"] }
+
+## Directory the shell is started in. When this is unset, or "None",
+## the working directory of the parent process will be used.
+#working_directory = "None"
+
+## Live config reload
+live_config_reload = true
+
+## Offer IPC using alacritty msg
+ipc_socket = true
+
+[cursor]
+unfocused_hollow = false
+
+[cursor.style]
+blinking = "On"
+shape = "Beam"
+
+[env]
+TERM = "xterm-256color"
+WINIT_X11_SCALE_FACTOR = "1.0"
+
+[window]
+decorations = "full"
+dynamic_title = true
+# history = 10000
+# multiplier = 3
+opacity = 0.90
+startup_mode = "Windowed"
+
+[window.dimensions]
+columns = 160
+lines = 80
+
+[window.padding]
+x = 12
+y = 12
