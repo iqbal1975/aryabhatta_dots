@@ -1,0 +1,66 @@
+//
+// ██╗    ██╗ █████╗ ██╗   ██╗██████╗  █████╗ ██████╗
+// ██║    ██║██╔══██╗╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+// ██║ █╗ ██║███████║ ╚████╔╝ ██████╔╝███████║██████╔╝
+// ██║███╗██║██╔══██║  ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+// ╚███╔███╔╝██║  ██║   ██║   ██████╔╝██║  ██║██║  ██║
+//  ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+//
+// Copyright (C) 2020-2023 Aditya Shakya <adi1090x@gmail.com>
+// Modified Iqbal Thaker (2024-2025)
+//
+// Waybar config file
+// vim: set ft=json5
+[
+  {
+    "include": "~/.config/hypr/waybar/modules",
+    "name": "top-bar",  			// Waybar name
+    "id": "top-bar", 		  		// Waybar id
+    "layer": "top",         	// Waybar at bottom (default) layer
+    "exclusive": true, 			// Request an exclusive zone from the compositor
+    "passthrough": false, 	  	// Pass any pointer events to the window under the bar
+    "position": "top", 			// Waybar position (top|bottom|left|right)
+    "height": "",	    				// Waybar height (to be removed for auto height)
+    "width": "", 					  // Waybar width (empty for auto width)
+    "spacing": 3, 					  // Gaps between modules
+    "margin": 0, 					  // Space around the bar
+    "margin-top": 0, 				// Space above the bar
+    "margin-bottom": 0, 			// Space below the bar
+    "margin-left": 0, 				// Space to the left of the bar
+    "margin-right": 0, 			// Space to the right of the bar
+    "fixed-center": true, 		// Center modules position
+    "ipc": true, 					  // Control waybar with `swaymsg bar` commands
+    "gtk-layer-shell": true,
+    "reload_style_on_change" : true,
+    // Choose the order of the modules
+    "modules-left": [ "custom/menu", "custom/separator", "custom/updates", "custom/separator", "custom/updbar", "custom/separator", "user", "custom/separator", "custom/github", "custom/separator", "custom/waybar-scrolling-mpris" ],
+    "modules-center": [ "custom/cava" ],
+    "modules-right": [ "network", "custom/separator", "group/audio", "custom/separator", "pulseaudio#microphone", "custom/separator", "custom/weather", "custom/separator", "clock" ]
+  },
+
+  {
+    "include": "~/.config/hypr/waybar/modules",
+    "name": "bot-bar",  			// Waybar name
+    "id": "bot-bar", 		  		// Waybar id
+    "layer": "top", 	  	      	// Waybar at bottom (default) layer
+    "exclusive": true, 			// Request an exclusive zone from the compositor
+    "passthrough": false, 	  	// Pass any pointer events to the window under the bar
+    "position": "bottom", 		// Waybar position (top|bottom|left|right)
+    "height": "",   					// Waybar height (to be removed for auto height)
+    "width": "", 					  // Waybar width (empty for auto width)
+    "spacing": 3, 					  // Gaps between modules
+    "margin": 0, 					  // Space around the bar
+    "margin-top": 0, 				// Space above the bar
+    "margin-bottom": 0, 			// Space below the bar
+    "margin-left": 0, 				// Space to the left of the bar
+    "margin-right": 0, 			// Space to the right of the bar
+    "fixed-center": true, 		// Center modules position
+    "ipc": true, 					  // Control waybar with `swaymsg bar` commands
+    "gtk-layer-shell": true,
+    "reload_style_on_change" : true,
+    // Choose the order of the modules
+    "modules-left": [ "custom/wf-recorder", "gamemode", "hyprland/workspaces", "custom/separator", "custom/events", "custom/separator", "hyprland/window" ],
+    //"modules-right": [ "group/hardware", "custom/separator", "tray", "custom/separator", "bluetooth", "custom/separator", "idle_inhibitor", "custom/separator", "custom/notification", "custom/separator", "privacy", "custom/separator", "systemd-failed-units", "custom/separator", "custom/power" ]
+    "modules-right": [ "group/hardware", "custom/separator", "tray", "custom/separator", "idle_inhibitor", "custom/separator", "custom/notification", "custom/separator", "custom/power" ]
+  }
+]

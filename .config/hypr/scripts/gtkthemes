@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2020-2023 Aditya Shakya <adi1090x@gmail.com>
+## Modified 2024 Iqbal Thaker
+##
+## Set GTK Themes, Icons, Cursor and Fonts
+
+# ▀█▀ █░█ █▀▀ █▀▄▀█ █▀▀
+# ░█░ █▀█ ██▄ █░▀░█ ██▄
+
+THEME='Gruvbox-Dark'
+ICONS='Gruvbox-Plus-Dark'
+
+# █▀▀ █▀█ █▄░█ ▀█▀
+# █▀░ █▄█ █░▀█ ░█░
+
+FONT='SF Pro Display Regular 11'
+
+# █▀▀ █░█ █▀█ █▀ █▀█ █▀█
+# █▄▄ █▄█ █▀▄ ▄█ █▄█ █▀▄
+
+CURSOR='Bibata-Modern-Ice'
+
+# usage: gtkthemes
+config="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/settings.ini"
+if [ ! -f "$config" ]; then exit 1; fi
+
+SCHEMA='gsettings set org.gnome.desktop.interface'
+WM='gsettings set org.gnome.desktop.wm.preferences'
+
+apply_themes() {
+  ${SCHEMA} gtk-theme "$THEME"
+  ${WM} theme "$THEME"
+  ${SCHEMA} icon-theme "$ICONS"
+  ${SCHEMA} cursor-theme "$CURSOR"
+  ${SCHEMA} font-name "$FONT"
+}
+
+# gtk-theme="$(grep 'gtk-theme-name' "$config" | sed 's/.*\s*=\s*//')"
+# icon-theme="$(grep 'gtk-icon-theme-name' "$config" | sed 's/.*\s*=\s*//')"
+# cursor-theme="$(grep 'gtk-cursor-theme-name' "$config" | sed 's/.*\s*=\s*//')"
+# font-name="$(grep 'gtk-font-name' "$config" | sed 's/.*\s*=\s*//')"
+
+# apply_themes() {
+#   ${SCHEMA} gtk-theme "$gtk-theme"
+#   ${WM} theme "$gtk-theme"
+#   ${SCHEMA} icon-theme "$icon-theme"
+#   ${SCHEMA} cursor-theme "$cursor-theme"
+#   ${SCHEMA} font-name "$font-name"
+# }
+
+apply_themes

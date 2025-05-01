@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+running=""
+error=""
+class=""
+tooltip=""
+text=""
+stat=$( nordvpn status )
+
+if vpn is-running; then
+    running="set"
+fi
+
+if [[ -z "$running" ]]; then
+    # nordvpn running nordlynx does not put an entry in the routing
+    # table, so ask nordvpn directly:
+    echo "$stat" | grep -q 'Status: Connected' && running="set"
+fi
+
+if [[ "$running" ]]; then
+    # remove spaces from country name to accomodate discrepancies eg Viet Nam vs Vietnam
+    country="$( echo "$stat" | sed -n '/Country: /s///p' | sed 's/[[:punct:] ]//g')"
+    # use 'tail' for US vs US Minor Outlying Islands
+    code="$( jq -r '.[]|.[]|.alpha_2+"\t"+.name' < /usr/share/iso-codes/json/iso_3166-1.json| sed 's/[[:punct:] ]//g' | grep -i "...$country" | tail -n 1 | cut -f 1)"
+    text=$'\uf023'"$code"
+else
+    text=$'\uf09c'
+fi
+
+if [[ -z "$running" ]]; then
+    PIDS=$( pgrep -f transmission-gtk; pgrep -f qbittorrent )
+    [[ "$PIDS" ]] && {
+        error="TORRENTING WITHOUT VPN"
+        class="warning"
+    }
+fi
+
+tooltip="L:toggle R:refresh (signal 10)"
+
+[[ "$running" ]] && {
+    host=$( echo "$stat" | grep "^Hostname" )
+    country=$( echo "$stat" | grep "^Country" )
+    city=$( echo "$stat" | grep "^City" )
+    tech=$( echo "$stat" | awk -F: '/^Current technology/ {print $2}' )
+    tooltip="$host\n$country\n$city\nTech: $tech\n$tooltip"
+}
+
+[[ "$error" ]] && {
+    tooltip="$tooltip\n$error"
+    class="error"
+}
+
+cat <<EOF
+{"text": "$text", "tooltip": "$tooltip", "class": "$class" }
+EOF
+
+# otherwise waybar doesn't show the widget!!!!
+exit 0
+
+# Local Variables:
+# eval: (add-hook 'after-save-hook (lambda nil (shell-command "pkill --signal RTMIN+10 waybar")) nil 'local)
+# End:

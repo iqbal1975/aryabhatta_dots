@@ -1,0 +1,8 @@
+# Preload Wallpapers
+preload = /home/iqbal/.cache/current_wallpaper.png
+
+# Set Wallpapers
+wallpaper = ,/home/iqbal/.cache/current_wallpaper.png
+
+# Disable Splash
+splash = false

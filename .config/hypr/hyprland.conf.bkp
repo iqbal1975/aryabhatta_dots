@@ -1,0 +1,777 @@
+#
+# ██╗  ██╗██╗   ██╗██████╗ ██████╗
+# ██║  ██║╚██╗ ██╔╝██╔══██╗██╔══██╗
+# ███████║ ╚████╔╝ ██████╔╝██████╔╝
+# ██╔══██║  ╚██╔╝  ██╔═══╝ ██╔══██╗
+# ██║  ██║   ██║   ██║     ██║  ██║
+# ╚═╝  ╚═╝   ╚═╝   ╚═╝     ╚═╝  ╚═╝
+#
+# Copyright (C) 2020-2024 Aditya Shakya <adi1090x@gmail.com>
+# Modified 2024-25 Iqbal Thaker <iqbal.thaker@gmail.com>
+#
+# Hyprland configuration file for Archcraft
+# Version: 0.48.1-1
+
+# Please note not all available settings / options are set here.
+# For a full list, see the wiki
+
+
+# █▀ █▀█ █░█ █▀█ █▀▀ █▀▀
+# ▄█ █▄█ █▄█ █▀▄ █▄▄ ██▄
+
+# Setting variables
+$mainMod 					= SUPER
+$hyprDir 					= $HOME/.config/hypr
+$modules					= $HOME/.config/hypr/modules
+$scriptsDir 			= $HOME/.config/hypr/scripts
+$theme						= $HOME/.config/hypr/theme
+
+#-- Source Files ----------------------------------------------------------
+# source 					= $theme/hyprtheme.conf
+# source 					= $theme/hyprtheme_decay_green.conf
+# source 					= $theme/hyprtheme_tokynight.conf
+source 						= $theme/hyprtheme_catppuccin_mocha.conf
+
+
+source 						= $modules/env_var.conf
+source 						= $modules/keybinds.conf
+source 						= $modules/media-binds.conf
+source 						= $modules/monitors.conf
+source 						= $modules/plugins.conf
+
+
+# █▀▀ █▀▀ █▄░█ █▀▀ █▀█ ▄▀█ █░░
+# █▄█ ██▄ █░▀█ ██▄ █▀▄ █▀█ █▄▄
+
+#-- General ---------------------------------------------------------------
+general {
+	border_size = $hypr_border_size
+	no_border_on_floating = false
+	gaps_in = $hypr_gaps_in
+	gaps_out = $hypr_gaps_out
+	gaps_workspaces = 0
+	col.active_border = $active_border_col_1 $active_border_col_2 $gradient_angle
+	col.inactive_border = $inactive_border_col_1 $inactive_border_col_2 $gradient_angle
+	col.nogroup_border = $active_border_col_1 $active_border_col_2 $gradient_angle
+	col.nogroup_border_active = $active_border_col_1 $active_border_col_2 $gradient_angle
+	# layout = dwindle
+	# layout = hy3
+	layout = master
+	no_focus_fallback = false
+	resize_on_border = true
+	extend_border_grab_area = 15
+	hover_icon_on_border = true
+	allow_tearing = false
+	resize_corner = 0
+}
+
+
+# █▀▄ █▀▀ █▀▀ █▀█ █▀█ ▄▀█ ▀█▀ █ █▀█ █▄░█
+# █▄▀ ██▄ █▄▄ █▄█ █▀▄ █▀█ ░█░ █ █▄█ █░▀█
+
+#-- Decoration ------------------------------------------------------------
+decoration {
+
+	# █▀█ █▀█ █░█ █▄░█ █▀▄ █▀▀ █▀▄  █▀▀ █▀█ █▀█ █▄░█ █▀▀ █▀█ █▀
+	# █▀▄ █▄█ █▄█ █░▀█ █▄▀ ██▄ █▄▀  █▄▄ █▄█ █▀▄ █░▀█ ██▄ █▀▄ ▄█
+
+	rounding = $hypr_rounding
+
+	# █▀█ █▀█ ▄▀█ █▀▀ █ ▀█▀ █▄█
+	# █▄█ █▀▀ █▀█ █▄▄ █ ░█░ ░█░
+
+	active_opacity = 0.90
+	inactive_opacity = 0.95
+	fullscreen_opacity = 0.90
+
+	# █▄▄ █░░ █░█ █▀█
+	# █▄█ █▄▄ █▄█ █▀▄
+
+	blur {
+		enabled = true
+		size = 5
+		passes = 3
+		ignore_opacity = true
+		input_methods = true
+		new_optimizations =  true
+		xray = true
+		noise = 0.0117
+		contrast = 0.8916
+		brightness = 0.8172
+		vibrancy = 0.1696
+		vibrancy_darkness = 0.0
+		special = false
+		popups = true
+		popups_ignorealpha = 0.2
+		}
+
+	# █▀ █░█ ▄▀█ █▀▄ █▀█ █░█░█
+	# ▄█ █▀█ █▀█ █▄▀ █▄█ ▀▄▀▄▀
+
+	shadow {
+		enabled = true
+		range = 5
+		render_power= 3
+		sharp = false
+		ignore_window =  true
+		color = $active_shadow_col
+		color_inactive = $inactive_shadow_col
+		offset = 2 2
+		scale = 1.0
+	}
+}
+
+
+# ▄▀█ █▄░█ █ █▀▄▀█ ▄▀█ ▀█▀ █ █▀█ █▄░█
+# █▀█ █░▀█ █ █░▀░█ █▀█ ░█░ █ █▄█ █░▀█
+
+#-- Animations ------------------------------------------------------------
+animations {
+	enabled = true
+	first_launch_animation = true
+
+	# █▄▄ █▀▀ ▀█ █ █▀▀ █▀█   █▀▀ █░█ █▀█ █░█ █▀▀
+	# █▄█ ██▄ █▄ █ ██▄ █▀▄   █▄▄ █▄█ █▀▄ ▀▄▀ ██▄
+	bezier = wind, 0.05, 0.9, 0.1, 1.05
+	bezier = winIn, 0.1, 1.1, 0.1, 1.1
+	bezier = winOut, 0.3, -0.3, 0, 1
+	bezier = linear, 1, 1, 1, 1
+	bezier = slow, 0, 0.85, 0.3, 1
+  bezier = overshot, 0.7, 0.6, 0.1, 1.1
+  bezier = bounce, 1.1, 1.6, 0.1, 0.85
+  bezier = slingshot, 1, -1, 0.15, 1.25
+  bezier = nice, 0, 6.9, 0.5, -4.20
+
+	# ▄▀█ █▄░█ █ █▀▄▀█ ▄▀█ ▀█▀ █ █▀█ █▄░█
+	# █▀█ █░▀█ █ █░▀░█ █▀█ ░█░ █ █▄█ █░▀█
+	# animation = windowsIn,1,12,default,popin 0%
+	# animation = windowsOut,1,12,default,popin
+	# animation = windowsMove,1,12,default,slide
+	# animation = fadeIn,1,12,default
+	# animation = fadeOut,1,12,default
+	# animation = fadeSwitch,1,12,default
+	# animation = fadeShadow,1,12,default
+	# animation = fadeDim,1,12,default
+	# animation = border,1,12,default
+	# animation = borderangle,1,10,default
+	# animation = workspaces,1,12,default,fade
+	# animation = specialWorkspace,1,5,default,fade
+	animation = windows, 1, 12, bounce, popin
+	animation = windowsIn, 1, 12, winIn, slide
+	animation = windowsOut, 1, 12, winOut, slide
+	animation = windowsMove, 1, 12, slow, slide
+	animation = border, 1, 12, linear
+	animation = borderangle, 1, 30, linear, loop
+	animation = fade, 1, 12, overshot
+	animation = fadeIn, 1, 12, overshot
+	animation = fadeOut, 1, 12, overshot
+	animation = fadeSwitch, 1, 12, bounce
+	animation = fadeShadow, 1, 12, bounce
+	animation = fadeDim, 1, 12, bounce
+	animation = workspaces, 1, 12, wind
+	animation = specialWorkspace,1,12,bounce,fade
+}
+
+
+# █ █▄░█ █▀█ █░█ ▀█▀
+# █ █░▀█ █▀▀ █▄█ ░█░
+
+#-- Input: Keyboard, Mouse, Touchpad --------------------------------------
+
+# Follow Mouse Cursor
+# 0 - Cursor movement will not change focus.
+# 1 - Cursor movement will always change focus to the window under the cursor.
+# 2 - Cursor focus will be detached from keyboard focus. Clicking on a window will move keyboard focus to that window.
+# 3 - Cursor focus will be completely separate from keyboard focus. Clicking on a window will not change keyboard focus.
+
+input {
+	kb_model = logitech-k850
+	kb_layout = us
+	kb_variant =
+	kb_options = fkeys:basic_13-24
+	kb_rules =
+	kb_file =
+	numlock_by_default = true
+	resolve_binds_by_sym = false
+	repeat_rate = 25
+	repeat_delay = 600
+	sensitivity = 0.0
+	accel_profile = adaptive
+	force_no_accel = false
+	left_handed = false
+	scroll_points =
+	scroll_method = edge
+	scroll_button = 0
+	scroll_button_lock = 0
+	scroll_factor = 1.0
+	natural_scroll = true
+	follow_mouse = 1
+	focus_on_close = 0
+	mouse_refocus = true
+	float_switch_override_focus = 2
+	special_fallthrough = false
+	off_window_axis_events = 1
+	emulate_discrete_scroll = 1
+	touchpad {
+		disable_while_typing = true
+		natural_scroll = true
+		scroll_factor = 1.0
+		middle_button_emulation = false
+		tap_button_map =
+		clickfinger_behavior = false
+		tap-to-click = true
+		drag_lock = false
+		tap-and-drag = false
+	}
+	touchdevice {
+		enabled = true
+		transform = 0
+		output =
+	}
+}
+
+# Keyboard
+$KB_ENABLED = true
+device {
+  name = logitech-k850
+  enabled = $KB_ENABLED
+}
+
+# Mouse
+$LOGITECH_ENABLED = true
+device {
+  name = logitech-m720-triathlon-1
+  enabled = $LOGITECH_ENABLED
+  sensitivity = 0.0
+  natural_scroll = true
+}
+
+
+# █▀▀ █▀▀ █▀ ▀█▀ █░█ █▀█ █▀▀ █▀
+# █▄█ ██▄ ▄█ ░█░ █▄█ █▀▄ ██▄ ▄█
+
+#-- Gestures --------------------------------------------------------------
+gestures {
+	workspace_swipe = true
+	workspace_swipe_fingers = 3
+	workspace_swipe_min_fingers = false
+	workspace_swipe_distance = 300
+	workspace_swipe_touch = false
+	workspace_swipe_invert = true
+	workspace_swipe_touch_invert = false
+	workspace_swipe_min_speed_to_force = 30
+	workspace_swipe_cancel_ratio = 0.5
+	workspace_swipe_create_new = true
+	workspace_swipe_direction_lock = true
+	workspace_swipe_direction_lock_threshold = 10
+	workspace_swipe_forever = false
+	workspace_swipe_use_r = false
+}
+
+
+# █▀▀ █▀█ █▀█ █░█ █▀█
+# █▄█ █▀▄ █▄█ █▄█ █▀▀
+
+#-- Group -----------------------------------------------------------------
+group {
+	auto_group = true
+	insert_after_current = true
+	focus_removed_window = true
+	merge_groups_on_drag = true
+	drag_into_group = 1
+	merge_groups_on_drag = true
+	merge_groups_on_groupbar = true
+	merge_floated_into_tiled_on_groupbar = false
+	group_on_movetoworkspace = false
+	col.border_active = $group_border_active_col_1 $group_border_active_col_2 $gradient_angle
+	col.border_inactive = $group_border_col_1 $group_border_col_2 $gradient_angle
+	col.border_locked_active = $group_border_active_col_1 $group_border_active_col_2 $gradient_angle
+	col.border_locked_inactive = $group_border_col_1 $group_border_col_2 $gradient_angle
+	groupbar {
+		enabled = true
+		font_family =
+	  font_size = 10
+	  gradients = true
+	  height = 14
+	  stacked = false
+	  priority = 3
+	  render_titles = true
+	  scrolling = true
+	  text_color = 0xffffffff
+	  col.active = $group_border_active_col_1 $group_border_active_col_2 $gradient_angle
+	  col.inactive = $group_border_col_1 $group_border_col_2 $gradient_angle
+	  col.locked_active = $group_border_active_col_1 $group_border_active_col_2 $gradient_angle
+	  col.locked_inactive = $group_border_col_1 $group_border_col_2 $gradient_angle
+	}
+}
+
+
+# █▀▄▀█ █ █▀ █▀▀ █▀▀ █░░ █░░ ▄▀█ █▄░█ █▀▀ █▀█ █░█ █▀
+# █░▀░█ █ ▄█ █▄▄ ██▄ █▄▄ █▄▄ █▀█ █░▀█ ██▄ █▄█ █▄█ ▄█
+
+#-- Miscellaneous ---------------------------------------------------------
+misc {
+	disable_hyprland_logo = false
+	disable_splash_rendering = false
+	col.splash = 0xffffffff
+	font_family = Sans
+	splash_font_family =
+	force_default_wallpaper = -1
+	vfr = true
+	vrr = 0
+	mouse_move_enables_dpms = true
+	key_press_enables_dpms = true
+	always_follow_on_dnd = true
+	layers_hog_keyboard_focus = true
+	animate_manual_resizes = false
+	animate_mouse_windowdragging = false
+	disable_autoreload = false
+	enable_swallow = false
+	swallow_regex =
+	swallow_exception_regex =
+	focus_on_activate = true
+	mouse_move_focuses_monitor = true
+	render_ahead_of_time = false
+	render_ahead_safezone = 1
+	allow_session_lock_restore = true
+	background_color = 0x111111
+	close_special_on_empty = true
+	new_window_takes_over_fullscreen = 2
+	exit_window_retains_fullscreen = false
+	initial_workspace_tracking = 1
+	middle_click_paste = true
+	render_unfocused_fps = 15
+}
+
+
+# █▄▄ █░░ █░█ █▀█   █░░ ▄▀█ █▄█ █▀▀ █▀█
+# █▄█ █▄▄ █▄█ █▀▄   █▄▄ █▀█ ░█░ ██▄ █▀▄
+
+#-- Blurring Layer Surfaces -----------------------------------------------
+layerrule = blur, gtk-layer-shell
+layerrule = ignorezero, gtk-layer-shell
+layerrule = xray 1, gtk-layer-shell
+
+layerrule = blur, lockscreen
+layerrule = ignorezero, lockscreen
+layerrule = xray 1, lockscreen
+
+layerrule = blur,waybar
+layerrule = ignorezero, waybar
+layerrule = xray 1, waybar
+
+#-- SwayNC ----------------------------------------------------------------
+layerrule = blur, swaync-control-center
+layerrule = blur, swaync-notification-window
+
+layerrule = ignorezero, swaync-control-center
+layerrule = ignorezero, swaync-notification-window
+
+layerrule = ignorealpha 0.5, swaync-control-center
+layerrule = ignorealpha 0.5, swaync-notification-window
+
+
+# █▄▄ █ █▄░█ █▀▄ █▀
+# █▄█ █ █░▀█ █▄▀ ▄█
+
+#-- Mouse Binds -----------------------------------------------------------
+binds {
+	pass_mouse_when_bound = false
+	scroll_event_delay = 300
+	workspace_back_and_forth = true
+	allow_workspace_cycles = true
+	workspace_center_on = 0
+	focus_preferred_method = 0
+	ignore_group_lock = false
+	movefocus_cycles_fullscreen = true
+	disable_keybind_grabbing = false
+	window_direction_monitor_fallback = true
+}
+
+#-- Xwayland Variables ----------------------------------------------------
+xwayland {
+	enabled = true
+	use_nearest_neighbor = true
+	force_zero_scaling = false
+}
+
+
+# █▀█ █▀▀ █▄░█ █▀▄ █▀▀ █▀█
+# █▀▄ ██▄ █░▀█ █▄▀ ██▄ █▀▄
+
+#-- Render Variables ------------------------------------------------------
+render {
+	explicit_sync =2
+	explicit_sync_kms = 2
+	direct_scanout = false
+}
+
+
+# █▀▀ █░█ █▀█ █▀ █▀█ █▀█
+# █▄▄ █▄█ █▀▄ ▄█ █▄█ █▀▄
+
+#-- Cursor Variables ------------------------------------------------------
+cursor {
+	sync_gsettings_theme = true
+	enable_hyprcursor = true
+	no_hardware_cursors = true
+	no_break_fs_vrr = false
+	min_refresh_rate = 24
+	hotspot_padding	= 1
+	inactive_timeout = 0
+	no_warps = false
+	persistent_warps = false
+	warp_on_change_workspace = false
+	warp_back_after_non_mouse_input = true
+	default_monitor =
+	zoom_factor = 1.0
+	zoom_rigid = false
+	hide_on_key_press = false
+	hide_on_touch = false
+	use_cpu_buffer = true
+}
+
+
+# █▀▄ █▀▀ █▄▄ █░█ █▀▀
+# █▄▀ ██▄ █▄█ █▄█ █▄█
+
+#-- Debug (Only for developers) -------------------------------------------
+debug {
+	overlay = false
+	damage_blink = false
+	disable_logs = false
+	disable_time = true
+	damage_tracking = 2
+	enable_stdout_logs = true
+	manual_crash = 0
+	suppress_errors = false
+	watchdog_timeout = 5
+	disable_scale_checks = false
+	error_limit = 5
+	error_position = 0
+	colored_stdout_logs = true
+}
+
+
+# █░░ ▄▀█ █▄█ █▀█ █░█ ▀█▀ █▀
+# █▄▄ █▀█ ░█░ █▄█ █▄█ ░█░ ▄█
+
+#-- Layout : Dwindle ------------------------------------------------------
+dwindle {
+	pseudotile = false
+	force_split = 2
+	preserve_split = false
+	smart_split = false
+	smart_resizing = true
+	permanent_direction_override = false
+	special_scale_factor = 0.8
+	split_width_multiplier = 1.0
+	use_active_for_splits = true
+	default_split_ratio = 1.0
+}
+
+#-- Layout : Master -------------------------------------------------------
+master {
+	allow_small_split = false
+	special_scale_factor = 0.8
+	mfact = 0.5
+	new_status = slave
+	new_on_top = false
+	new_on_active = none
+	orientation = left
+	inherit_fullscreen = true
+	slave_count_for_center_master = 2
+	smart_resizing = true
+	drop_at_cursor = true
+}
+
+
+# █░█░█ █ █▄░█ █▀▄ █▀█ █░█░█   █▀█ █░█ █░░ █▀▀ █▀
+# ▀▄▀▄▀ █ █░▀█ █▄▀ █▄█ ▀▄▀▄▀   █▀▄ █▄█ █▄▄ ██▄ ▄█
+
+# Window Rule
+# windowrule = RULE, PARAMETERS
+# Example rule:
+# windowrule = float, class:kitty, title:kitty
+# See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
+
+#windowrule = float,WINDOW
+#windowrule = tile,WINDOW
+#windowrule = fullscreen,WINDOW
+#windowrule = nofullscreenrequest,WINDOW
+#windowrule = move 69 420,WINDOW
+#windowrule = size 420 69,WINDOW
+#windowrule = minsize 420 69,WINDOW
+#windowrule = maxsize 420 69,WINDOW
+#windowrule = center,WINDOW
+#windowrule = pseudo,WINDOW
+#windowrule = monitor 0,WINDOW
+#windowrule = workspace 12,WINDOW
+#windowrule = opacity 1.0,WINDOW
+#windowrule = opaque 1.0,WINDOW
+#windowrule = animation slide left,WINDOW
+#windowrule = rounding 10,WINDOW
+#windowrule = noblur,WINDOW
+#windowrule = nofocus,WINDOW
+#windowrule = noborder,WINDOW
+#windowrule = noshadow,WINDOW
+#windowrule = forceinput,WINDOW
+#windowrule = windowdance,WINDOW
+#windowrule = pin,WINDOW
+#windowrule = noanim,WINDOW
+#windowrule = bordercolor color color,WINDOW
+#windowrule = idleinhibit none,WINDOW
+#windowrule = unset,WINDOW
+#windowrule = nomaxsize,WINDOW
+
+#--  Window rule with Tags ------------------------------------------------
+# windowrule = tag +term, class:footclient    # add dynamic tag `term*` to window footclient
+# windowrule = tag term, class:footclient     # toggle dynamic tag `term*` for window footclient
+# windowrule = tag +code, tag:cpp             # add dynamic tag `code*` to window with tag `cpp`
+
+# windowrule = opacity 0.8, tag:code          # set opacity for window with tag `code` or `code*`
+# windowrule = opacity 0.7, tag:cpp           # window with tag `cpp` will match both `code` and `cpp`, the last one will override prior match
+# windowrule = opacity 0.6, tag:term*         # set opacity for window with tag `term*` only, `term` will not be matched
+
+# windowrule = tag -code, tag:term            # remove dynamic tag `code*` for window with tag `term` or `term*`
+
+#-- Tags with keybindings -------------------------------------------------
+# bind = $mainMod Ctrl, 2, tagwindow, alpha_0.2
+# bind = $mainMod Ctrl, 4, tagwindow, alpha_0.4
+
+# windowrule = opacity 0.2 override, tag:alpha_0.2
+# windowrule = opacity 0.4 override, tag:alpha_0.4
+
+#-- Example Rules ---------------------------------------------------------
+# windowrule = move 100 100, kitty # moves kitty to 100 100
+# windowrule = animation popin, kitty # sets the animation style for kitty
+# windowrule = noblur, firefox # disables blur for firefox
+# windowrule = move cursor -50% -50%, kitty # moves kitty to the center of the cursor
+# windowrule = bordercolor rgb(FF0000) rgb(880808), fullscreen:1 # set bordercolor to red if window is fullscreen
+# windowrule = bordercolor rgb(00FF00), fullscreenstate:* 1 # set bordercolor to green if window's client fullscreen state is 1(maximize) (internal state can be anything)
+# windowrule = bordercolor rgb(FFFF00), title:.*Hyprland.* # set bordercolor to yellow when title contains Hyprland
+# windowrule = opacity 1.0 override 0.5 override 0.8 override, kitty # set opacity to 1.0 active, 0.5 inactive and 0.8 fullscreen for kitty
+# windowrule = rounding 10, kitty # set rounding to 10 for kitty
+# windowrule = stayfocused, class:(pinentry-)(.*) # fix pinentry losing focus
+
+#-- Smart Gaps ------------------------------------------------------------
+workspace = w[tv1], gapsout:5, gapsin:5
+workspace = f[1], gapsout:5, gapsin:5
+windowrulev2 = bordersize 3, floating:0, onworkspace:w[tv1]
+windowrulev2 = rounding 3, floating:0, onworkspace:w[tv1]
+windowrulev2 = bordersize 3, floating:0, onworkspace:f[1]
+windowrulev2 = rounding 3, floating:0, onworkspace:f[1]
+
+#-- Window Rules ----------------------------------------------------------
+windowrule = float, center, title:File Operation Progress
+windowrule = float, center, title:Confirm to Replace Files
+
+# Common Modals
+windowrulev2 = float, center, title:^(Open)$
+windowrulev2 = float, center, title:^(Choose Files)$
+windowrulev2 = float, center, title:^(Save As)$
+windowrulev2 = float, center, title:^(Confirm to Replace Files)$
+windowrulev2 = float, center, title:^(File Operation Progress)$
+
+# KDE Apps
+windowrule = float, center, size 75% 90%, title:kvantummanager
+
+windowrulev2 = float, center, size 75% 90%, class:org.kde.kate
+windowrulev2 = float, center, class:org.kde.kcalc
+
+# Kando
+windowrule = noblur, title:kando
+windowrule = noborder, title:kando
+windowrule = noanim, title:kando
+windowrule = center, title:kando
+windowrule = size 100% 100%, title:kando
+
+bind = CTRL, Space, global, kando:prototype_trigger
+
+# Ark
+windowrulev2 = float, center, class:^(org.kde.ark)$
+
+# Firefox PIP
+windowrulev2 = size 800 450, title:(Picture-in-Picture)
+windowrulev2 = pin, title:^(Picture-in-Picture)$
+windowrulev2 = float, title:^(Firefox)$
+windowrulev2 = size 800 450, title:(Firefox)
+windowrulev2 = pin, title:^(Firefox)$
+
+# Flameshot
+windowrulev2 = float,title:^(flameshot)$
+windowrulev2 = move 0 0,title:^(flameshot)
+windowrulev2 = suppressevent maximize,title:^(flameshot)
+windowrulev2 = suppressevent fullscreen,title:^(flameshot)
+
+# Gimp
+windowrulev2 = float, title:^(GNU Image Manipulation Program)$
+
+# Meld
+windowrulev2 = maximize, title:^(Meld)$
+
+# OBS
+windowrulev2 = float, class:^(com.obsproject.Studio)$
+
+# Spotify
+windowrulev2 = tile, class:^(Spotify)$
+windowrulev2 = workspace 4 silent, class:^(Spotify)$
+
+# Steam
+windowrulev2 = stayfocused, title:^()$,class:^(steam)$
+windowrulev2 = minsize 1 1, title:^()$,class:^(steam)$
+
+# Taskwarrior
+# windowrule = center, ^(task-floating)$
+# windowrule = float, ^(task-floating)$
+# windowrule = dimaround, ^(task-floating)$
+# windowrule = noborder, ^(task-floating)$
+
+# Telegram media viewer
+$telegram = class:^(org.telegram.desktop)$, title:^(Media viewer)$
+windowrule = float, center, $telegram
+
+# VLC
+windowrule = float, center, title:^(VLC media player)$
+
+# XWayland
+windowrulev2 = opacity 0.0 override 0.0 override, class:^(xwaylandvideobridge)$
+windowrulev2 = noanim, class:^(xwaylandvideobridge)$
+windowrulev2 = noinitialfocus, class:^(xwaylandvideobridge)$
+windowrulev2 = maxsize 1 1, class:^(xwaylandvideobridge)$
+windowrulev2 = noblur, class:^(xwaylandvideobridge)$
+
+#-- Workspace Rules -------------------------------------------------------
+# workspace = WORKSPACE, RULES
+#
+# Props
+# r[A-B] - ID range from A to B inclusive
+# s[bool] - Whether the workspace is special or not
+# n[bool], n[s:string], n[e:string] - named actions. n[bool] -> whether a workspace is a named workspace, s and e are starts and ends with respectively
+# m[monitor] - Monitor selector
+# w[(flags)A-B], w[(flags)X] - Prop for window counts on the workspace. A-B is an inclusive range, X is a specific number. Flags can be omitted. It can be t for tiled-only, f for floating-only, g to count groups instead of windows, and v to count only visible windows.
+# f[-1], f[0], f[1], f[2] - fullscreen state of the workspace. -1: no fullscreen, 0: fullscreen, 1: maximized, 2, fullscreen without fullscreen state sent to the window.
+#
+# workspace = w[t1], gapsout:0, gapsin:0, border: 0, rounding:0
+# workspace = w[tg1], gapsout:0, gapsin:0, border: 0, rounding:0
+# workspace = f[1], gapsout:0, gapsin:0, border: 0, rounding:0
+
+
+# █░█ █▀▄▀█
+# ▀▄▀ █░▀░█
+
+bind = CTRL Alt_L, V, submap, passthrough
+submap = passthrough
+bind = CTRL Alt_L, V, submap, reset
+submap = reset
+
+
+# █░░ ▄▀█ █░█ █▄░█ █▀▀ █░█   █▀▀ ▀▄▀ █▀▀ █▀▀
+# █▄▄ █▀█ █▄█ █░▀█ █▄▄ █▀█   ██▄ █░█ ██▄ █▄▄
+
+#-- Set CLight / Hyprsunset -----------------------------------------------
+# exec-once = clight & clight-gui
+exec-once = $HOME/.local/bin/blueLight.sh
+
+#-- Hyprcursor ------------------------------------------------------------
+exec-once = hyprctl setcursor Bibata-Modern-Ice 24
+
+#-- Hypridle --------------------------------------------------------------
+exec-once = hypridle
+
+#-- OSD server ------------------------------------------------------------
+exec = swayosd-server
+
+#-- Sway Notification Center ----------------------------------------------
+exec = swaync
+bind = $mainMod SHIFT,			C,	 			exec, swaync-client -t -sw
+
+#-- Move Workspaces to Monitor --------------------------------------------
+# exec-once = $scriptsDir/handle_monitor_connect.sh
+
+#-- Workspace Switcher ----------------------------------------------------
+exec-once = $HOME/.config/workspacer/workspace_listener.sh
+bind = $mainMod, 					Y, 				exec, $HOME/.config/workspacer/workspaced.py
+windowrule = float, title:^(Workspace Selector)$
+
+#-- Load Plugins ----------------------------------------------------------
+exec-once = hyprpm reload -n
+
+#-- Setup Portal ----------------------------------------------------------
+exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP  # Wayland magic (screen sharing etc.)
+exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP           # More wayland magic (screen sharing etc.)
+exec-once = systemctl --user restart xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-desktop-portal
+
+#-- Share Picker ----------------------------------------------------------
+exec-once = dbus-update-activation-environment --systemd --all
+exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME
+
+#-- Cliphist setup --------------------------------------------------------
+exec-once = wl-paste --type text --watch cliphist store 								#Stores only text data
+exec-once = wl-paste --type image --watch cliphist store 								#Stores only image data
+exec-once = wl-paste --type application/pdf --watch cliphist store			#Stores PDF data
+bind = $mainMod, 					C, 				exec, $scriptsDir/cliphist.sh c			#Cliphist Copy
+# bind = $mainMod CTRL, 		C, 				exec, $scriptsDir/cliphist.sh d			#Cliphist Delete
+# bind = $mainMod SHIFT, 		C, 				exec, $scriptsDir/cliphist.sh w			#Cliphist Wipe
+
+exec-once = wl-clip-persist --clipboard regular
+
+#-- Clipse setup ----------------------------------------------------------
+exec-once = clipse -listen # run listener on startup
+
+windowrulev2 = float, class:(clipse) # ensure you have a floating window class set if you want this behaviour
+windowrulev2 = size 900 750, class:(clipse) # set the size of the window as necessary
+
+bind = $mainMod CTRL,			C, 				exec,  kitty --class clipse -e 'clipse'
+
+#-- Scripts ---------------------------------------------------------------
+exec-once = $scriptsDir/gtkthemes 											# GTK Theme Settings
+exec-once = /usr/lib/polkit-kde-authentication-agent-1  # Authentication dialog for GUI apps
+exec-once = blueman-applet && blueman-tray              # Systray app for BT
+exec-once = nm-applet --indicator                       # Systray app for Network/Wifi
+exec-once = /usr/lib/kdeconnectd
+exec-once = /usr/bin/kdeconnect-indicator
+exec-once = mpd
+# exec-once = pypr --debug /tmp/pypr.log									# When Testing
+exec-once = pypr																				# When Stable
+exec-once = sleep 60 && safeeyes -e
+exec-once = udiskie --no-automount --tray &
+
+#-- ML4W Hyprland Settings App --------------------------------------------
+exec-once = ~/.config/ml4w-hyprland-settings/hyprctl.sh
+
+#-- HyprPanel -------------------------------------------------------------
+# exec-once = hyprpanel																		# AGS HyprPanel
+
+#-- NWG Dock --------------------------------------------------------------
+# bind = $mainMod SHIFT, 		D, 				exec, $nwg-dock
+
+#-- Wallpaper Settings ----------------------------------------------------
+# Start SWWWW
+exec-once = swww query || swww-daemon --format xrgb
+# exec-once = waypaper --restore --backend swww						# Restore Wallpaper
+# exec-once = sleep 120 && wallpaper-changer_swww.sh ~/Pictures/wallpapers/nord-background &
+# exec-once = sleep 120 && wallpaper-changer_swww.sh ~/Downloads/Git/orxngc/walls-catppuccin-mocha &
+exec-once = sleep 120 && wallpaper-changer_swww.sh ~/Downloads/Git/StephanRaabe/wallpaper &
+
+#-- Waybar ----------------------------------------------------------------
+exec-once = printf "[D-BUS Service]\nName=org.kde.kded6\nExec=/bin/false" > $HOME/.local/share/dbus-1/services/org.kde.kded6.service
+exec-shutdown = rm $HOME/.local/share/dbus-1/services/org.kde.kded6.service
+exec-once = $scriptsDir/statusbar                       # Waybar
+
+#-- Workspaces ------------------------------------------------------------
+exec-once = [workspace 1 silent] kitty
+exec-once = [workspace 4 silent] spotify
+exec-once = [workspace 5 silent] bitwarden-desktop
+exec-once = [workspace 5 silent] vorta
+exec-once = [workspace 5 silent] kitty
+exec-once = [workspace 6 silent] dolphin
+exec-once = [workspace 8 silent] signal-desktop
+exec-once = [workspace 8 silent] slack
+exec-once = [workspace 9 silent] telegram-desktop
+exec-once = [workspace 9 silent] zapzap
+exec-once = [workspace 10 silent] fractal
+exec-once = [workspace 10 silent] vesktop		# OR webcord
+exec-once = [workspace 11 silent] kitty -e yazi					# OR ranger
+exec-once = [workspace 12 silent] kitty -e glances
+exec-once = sleep 30 && hyprctl dispatch workspace 5

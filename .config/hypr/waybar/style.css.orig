@@ -1,0 +1,501 @@
+/*
+ * Copyright (C) 2020-2023 Aditya Shakya <adi1090x@gmail.com>
+ * Modified by Iqbal Thaker <iqbal.thaker@gmail.com>
+*/
+
+/** ********** Import Colors ********** **/
+@import "./colors.css";
+
+/** ********** Fonts ********** **/
+* {
+  margin: 1px;
+  padding: 1px;
+  border-radius: 4px;
+  font-family: "JetBrains Mono", "Iosevka Nerd Font", archcraft, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  min-height: 0;
+}
+
+/** ********** Waybar Window ********** **/
+window#waybar {
+  background-color: @background;
+  background: shade(alpha(@borders, 0.9), 1.25);
+  /* border-bottom: 2px solid @background-alt1; */
+  border-bottom: 1px solid alpha(@unfocused_borders, 0.85);
+  color: @foreground;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+window#waybar.hidden {
+  opacity: 0.25;
+}
+
+/** ********** Custom ********** **/
+
+#custom-menu {
+  background-color: @magenta;
+  color: @background;
+  border-radius: 10px;
+  margin: 5px 5px 5px 5px;
+  padding: 2px 2px 2px 8px;
+}
+
+#custom-power {
+  background-color: @magenta;
+  color: @background;
+  border-radius: 10px;
+  margin: 5px 5px 5px 5px;
+  padding: 2px 8px 2px 8px;
+}
+
+/** ********** Idle Inhibitor ********** **/
+#idle_inhibitor {
+  background-color: @green;
+  color: @background;
+  border-radius: 10px;
+  margin: 5px 5px 5px 5px;
+  padding: 2px 4px 2px 4px;
+}
+#idle_inhibitor.deactivated {
+  background-color: @white;
+}
+
+/** ********** Tray ********** **/
+#tray {
+  background-color: @background-alt1;
+  border-radius: 10px;
+  margin: 5px 5px 5px 5px;
+  padding: 2px 8px 2px 8px;
+}
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+}
+/* #tray > .active { */
+/* } */
+
+/** ********** MPD ********** **/
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+#mpd {
+  color: @foreground;
+  font-weight: bold;
+}
+#mpd.disconnected {
+  color: @red;
+}
+#mpd.stopped {
+  color: @yellow;
+}
+#mpd.playing {
+  color: @cyan;
+}
+/* #mpd.paused { */
+/* } */
+
+#mpd.2 {
+  border-radius: 10px 0px 0px 10px;
+  margin: 6px 0px 6px 6px;
+  padding: 4px 6px 4px 10px;
+}
+#mpd.3 {
+  margin: 6px 0px 6px 0px;
+  padding: 4px;
+}
+#mpd.4 {
+  border-radius: 0px 10px 10px 0px;
+  margin: 6px 6px 6px 0px;
+  padding: 4px 10px 4px 6px;
+}
+#mpd.2,
+#mpd.3,
+#mpd.4 {
+  background-color: @background-alt1;
+}
+
+/** ********** Media ********** **/
+#custom-media {
+  background-color: @background-alt1;
+  color: @foreground;
+  border-radius: 10px;
+  margin: 6px 0px 6px 6px;
+  padding: 4px 8px;
+  font-weight: bold;
+}
+
+#custom-media.paused {
+  color: @foreground;
+}
+
+#custom-media.playing {
+  background: linear-gradient(
+    90deg,
+    @magenta 25%,
+    @red 50%,
+    @yellow 75%,
+    @cyan 100%
+  );
+  background-size: 300% 300%;
+  animation: gradient 10s ease infinite;
+  color: @background;
+}
+
+#custom-media.offline {
+  color: @red;
+}
+
+/** ********** Cava ********** **/
+#custom-cava {
+  border-radius: 10px;
+  margin: 6px 0px 6px 6px;
+  padding: 4px 8px;
+  background: linear-gradient(
+    90deg,
+    @magenta 25%,
+    @red 50%,
+    @yellow 75%,
+    @cyan 100%
+  );
+  background-size: 300% 300%;
+  animation: gradient 10s ease infinite;
+  color: @background;
+}
+
+/** ********** CPU ********** **/
+#cpu {
+  color: @red;
+}
+
+/** ********** Memory ********** **/
+#memory {
+  color: @green;
+}
+
+/** ********** Disk ********** **/
+#disk {
+  color: @yellow;
+}
+
+/** ********** Pulseaudio ********** **/
+#pulseaudio {
+  color: @green;
+}
+#pulseaudio.bluetooth {
+  color: @cyan;
+}
+#pulseaudio.muted {
+  color: @red;
+}
+
+#pulseaudio.2 {
+}
+#pulseaudio.2.bluetooth {
+}
+#pulseaudio.2.muted {
+}
+
+/** ********** Backlight ********** **/
+#backlight {
+  color: @yellow;
+}
+
+/** ********** Battery ********** **/
+#battery {
+  color: @magenta;
+}
+/* #battery.charging { */
+/* } */
+/* #battery.plugged { */
+/* } */
+@keyframes blink {
+  to {
+    color: @foreground;
+  }
+}
+#battery.critical:not(.charging) {
+  background-color: @background-alt1;
+}
+#battery.2.critical:not(.charging) {
+  background-color: @background-alt2;
+  color: @yellow;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/** ********** Network ********** **/
+#network {
+  color: @blue;
+}
+#network.disconnected,
+#network.disabled {
+  color: @red;
+}
+/* #network.linked { */
+/* } */
+/* #network.ethernet { */
+/* } */
+/* #network.wifi { */
+/* } */
+
+/** ********** Clock ********** **/
+#clock {
+  color: @cyan;
+  font-weight: bold;
+}
+
+/** ********** WLR Desktop ********** **/
+#workspaces {
+  background-color: @background-alt1;
+  border-radius: 10px;
+  margin: 6px 0px 6px 6px;
+  padding: 0px 5px;
+}
+#workspaces button {
+  color: @foreground;
+}
+#workspaces button.active {
+  color: @magenta;
+}
+#workspaces button.urgent {
+  color: @red;
+}
+#workspaces button.hidden {
+  color: @yellow;
+}
+
+/** ********** Custom Updates ********** **/
+@keyframes new-updates {
+  to {
+    color: #4cdd85;
+  }
+}
+
+@keyframes refreshing {
+  0% {
+    color: #555555;
+  }
+  20% {
+    color: #1793d1;
+  }
+  40% {
+    color: #555555;
+  }
+  60% {
+    color: #1793d1;
+  }
+  80% {
+    color: #555555;
+  }
+  95% {
+    color: #1793d1;
+  }
+  100% {
+    color: #555555;
+  }
+}
+
+/* #custom-updates { */
+/*    color: #555555;*/
+/* } */
+
+/* #custom-updates.updates { */
+/*    color: #00CF52;*/
+/* } */
+
+#custom-updates.new-updates {
+  color: #555555;
+  animation-name: new-updates;
+  animation-iteration-count: 20;
+  animation-direction: alternate;
+  animation-duration: 0.5s;
+}
+
+#custom-updates.refreshing {
+  animation-name: refreshing;
+  animation-timing-function: linear;
+  animation-duration: 10s;
+}
+
+/* #custom-updates.offline { */
+/*    color: #E2426C;*/
+/* } */
+
+/** ********** Check Updates ********** **/
+@keyframes new-update {
+  to {
+    color: #4cdd85;
+  }
+}
+
+@keyframes refresh {
+  0% {
+    color: #555555;
+  }
+  20% {
+    color: #1793d1;
+  }
+  40% {
+    color: #555555;
+  }
+  60% {
+    color: #1793d1;
+  }
+  80% {
+    color: #555555;
+  }
+  95% {
+    color: #1793d1;
+  }
+  100% {
+    color: #555555;
+  }
+}
+
+/* #custom-checkupd { */
+/*    color: #555555;*/
+/* } */
+
+/* #custom-checkupd.updates { */
+/*    color: #00CF52;*/
+/* } */
+
+#custom-checkupd.new-update {
+  color: #555555;
+  animation-name: new-update;
+  animation-iteration-count: 20;
+  animation-direction: alternate;
+  animation-duration: 0.5s;
+}
+
+#custom-checkupd.refresh {
+  animation-name: refresh;
+  animation-timing-function: linear;
+  animation-duration: 10s;
+}
+
+/* #custom-checkupd.offline { */
+/*    color: #E2426C;*/
+/* } */
+
+/** ********** System Updates ********** **/
+@keyframes blink-update {
+  to {
+    background-color: @blue;
+  }
+}
+
+#custom-pacman {
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+#custom-pacman.pending-updates {
+  animation-name: blink-update;
+  animation-duration: 3s;
+}
+
+/** ********** Reminders ********** **/
+#custom-remind {
+  padding: 0 10px;
+  margin: 0 0px;
+  color: #ffffff;
+  background-color: #f0932b;
+}
+
+/** ********** Common style ********** **/
+#backlight,
+#battery,
+#clock,
+#cpu,
+#disk,
+#memory,
+#pulseaudio,
+#network {
+  background-color: @background-alt1;
+  border-radius: 10px 0px 0px 10px;
+  margin: 6px 0px 6px 0px;
+  padding: 4px 6px;
+}
+
+#backlight.2,
+#battery.2,
+#clock.2,
+#cpu.2,
+#disk.2,
+#memory.2,
+#pulseaudio.2,
+#network.2 {
+  background-color: @background-alt2;
+  color: @foreground;
+  font-weight: bold;
+  border-radius: 0px 10px 10px 0px;
+  margin: 6px 6px 6px 0px;
+  padding: 5px 6px 4px 6px;
+}
+
+/* #temperature.critical { */
+/*   background-color: @red; */
+/* } */
+
+#custom-vpn.error {
+  color: @foreground;
+  background-color: @background;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#custom-r_end {
+  border-radius: 0px 10px 10px 0px;
+  margin-right: 5px;
+  padding-right: 3px;
+}
+
+#custom-l_end {
+  border-radius: 10px 0px 0px 10px;
+  margin-left: 5px;
+  padding-left: 3px;
+}
+
+#custom-sr_end {
+  border-radius: 0px;
+  margin-right: 5px;
+  padding-right: 3px;
+}
+
+#custom-sl_end {
+  border-radius: 0px;
+  margin-left: 5px;
+  padding-left: 3px;
+}
+
+#custom-rr_end {
+  border-radius: 0px 10px 10x 0px;
+  margin-right: 5px;
+  padding-right: 3px;
+}
+
+#custom-rl_end {
+  border-radius: 10px 0px 0px 10px;
+  margin-left: 5px;
+  padding-left: 3px;
+}

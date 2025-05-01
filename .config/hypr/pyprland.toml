@@ -1,0 +1,69 @@
+[pyprland]
+plugins = [
+  "expose",
+  "fetch_client_menu",
+  "magnify",
+  "scratchpads",
+  "shift_monitors",
+  "toggle_special",
+  "workspaces_follow_focus"
+]
+
+# using variables for demonstration purposes (not needed)
+[pyprland.variables]
+term_classed = "kitty --class"
+
+[expose]
+include_special = false
+
+[scratchpads.effects]
+command = "easyeffects"
+margin = 50
+animation = "fromTop"
+unfocus = "hide"
+lazy = true
+
+[scratchpads.gmail]
+command = "[term_classed] scratchpad -e neomutt"
+margin = 50
+animation = "fromTop"
+unfocus = "hide"
+lazy = true
+
+[scratchpads.news]
+command = "[term_classed] scratchpad -e newsboat"
+margin = 50
+animation = "fromLeft"
+unfocus = "hide"
+lazy = true
+
+[scratchpads.player]
+command = "vlc"
+margin = 50
+animation = "fromLeft"
+unfocus = "hide"
+lazy = true
+
+[scratchpads.term]
+command = "[term_classed] scratchpad -e btop"
+margin = 50
+animation = "fromBottom"
+unfocus = "hide"
+lazy = true
+
+[scratchpads.torrents]
+command = "qbittorrent"
+margin = 50
+animation = "fromBottom"
+unfocus = "hide"
+lazy = true
+
+[scratchpads.volume]
+command = "pavucontrol"
+margin = 50
+animation = "fromRight"
+unfocus = "hide"
+lazy = true
+
+[workspaces_follow_focus]
+max_workspaces = 12

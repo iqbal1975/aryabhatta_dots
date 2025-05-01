@@ -1,0 +1,71 @@
+{
+  "pyprland": {
+    "plugins": [
+      "expose",
+      "fetch_client_menu",
+      "lost_windows",
+      "magnify",
+      "scratchpads",
+      "shift_monitors",
+      "toggle_special",
+      "workspaces_follow_focus"
+    ]
+  },
+  "expose": {
+    "include_special": false
+  },
+  "scratchpads": {
+    "effects": {
+      "command": "easyeffects",
+      "margin": 50,
+      "animation": "fromTop",
+      "unfocus": "hide",
+      "lazy": true
+    },
+    "gmail": {
+      "command": "kitty --class scratchpad -e neomutt",
+      "margin": 50,
+      "animation": "fromTop",
+      "unfocus": "hide",
+      "lazy": true
+    },
+    "news": {
+      "command": "kitty --class scratchpad -e newsboat",
+      "margin": 50,
+      "animation": "fromLeft",
+      "unfocus": "hide",
+      "lazy": true
+    },
+    "player": {
+      "command": "vlc",
+      "margin": 50,
+      "animation": "fromLeft",
+      "unfocus": "hide",
+      "lazy": true
+    },
+    "term": {
+      "command": "kitty --class scratchpad -e btop",
+      "margin": 50,
+      "animation": "fromBottom",
+      "unfocus": "hide",
+      "lazy": true
+    },
+    "torrents": {
+      "command": "qbittorrent",
+      "margin": 50,
+      "animation": "fromBottom",
+      "unfocus": "hide",
+      "lazy": true
+    },
+    "volume": {
+      "command": "pavucontrol",
+      "margin": 50,
+      "animation": "fromRight",
+      "unfocus": "hide",
+      "lazy": true
+    }
+  },
+  "workspaces_follow_focus": {
+    "max_workspaces": 12
+  }
+}

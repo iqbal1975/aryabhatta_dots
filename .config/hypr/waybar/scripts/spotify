@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2020-2023 Aditya Shakya <adi1090x@gmail.com>
+##
+## Script for spotify for waybar
+
+# player_status=$(playerctl status 2> /dev/null)
+player_status=$(playerctl metadata --format '{{playerName}}: {{lc(status)}}' 2>/dev/null)
+
+# if [ "$player_status" = "spotify: playing" ]; then
+# 	echo -e " $(playerctl metadata artist) - $(playerctl metadata title)\nPlaying: $(playerctl metadata artist) - $(playerctl metadata title)\nplaying"
+# elif [ "$player_status" = "spotify: paused" ]; then
+# 	echo -e " $(playerctl metadata artist) - $(playerctl metadata title)\nPaused: $(playerctl metadata artist) - $(playerctl metadata title)\npaused"
+# else
+# 	echo -e " Spotify Offline!\nSpotify Offline.\noffline"
+# fi
+
+if [ "$player_status" = "spotify: playing" ]; then
+	echo -e " $(playerctl metadata artist) - $(playerctl metadata title)\nPlaying: $(playerctl metadata artist) - $(playerctl metadata title)\nplaying"
+elif [ "$player_status" = "spotify: paused" ]; then
+	echo -e " $(playerctl metadata artist) - $(playerctl metadata title)\nPaused: $(playerctl metadata artist) - $(playerctl metadata title)\npaused"
+elif [ "$player_status" = "brave: playing" ]; then
+	echo -e " $(playerctl metadata artist) - $(playerctl metadata title)\nPlaying: $(playerctl metadata artist) - $(playerctl metadata title)\nplaying"
+elif [ "$player_status" = "brave: paused" ]; then
+	echo -e " $(playerctl metadata artist) - $(playerctl metadata title)\nPaused: $(playerctl metadata artist) - $(playerctl metadata title)\npaused"
+elif [ "$player_status" = "chromium: playing" ]; then
+	echo -e " $(playerctl metadata artist) - $(playerctl metadata title)\nPlaying: $(playerctl metadata artist) - $(playerctl metadata title)\nplaying"
+elif [ "$player_status" = "chromium: paused" ]; then
+	echo -e " $(playerctl metadata artist) - $(playerctl metadata title)\nPaused: $(playerctl metadata artist) - $(playerctl metadata title)\npaused"
+else
+	echo -e " Player Offline!\nPlayer Offline.\noffline"
+fi

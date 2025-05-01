@@ -1,0 +1,229 @@
+exec = systemctl start --user emacs.service && emacsclient -e "(setenv \"HYPRLAND_INSTANCE_SIGNATURE\" \"$HYPRLAND_INSTANCE_SIGNATURE\")"
+
+general {
+    gaps_in = 3
+    gaps_out = 5
+    border_size = 2
+    col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
+    col.inactive_border = rgba(595959aa)
+
+    resize_on_border = true
+    extend_border_grab_area = 5;
+
+    layout = hy3
+}
+
+input {
+    kb_layout = us
+    sensitivity = 0
+    follow_mouse = 1
+    mouse_refocus = false
+    accel_profile = flat
+}
+
+decoration {
+    rounding = 5
+
+    blur {
+        enabled = true
+	size = 7
+	passes = 4
+	noise = 0.008
+	contrast = 0.8916
+	brightness = 0.8
+    }
+
+    drop_shadow = yes
+    shadow_range = 4
+    shadow_render_power = 3
+    col.shadow = rgba(1a1a1aee)
+}
+
+animations {
+    enabled = yes
+
+    bezier = windowIn, 0.06, 0.71, 0.25, 1
+    bezier = windowResize, 0.04, 0.67, 0.38, 1
+
+    animation = windowsIn, 1, 3, windowIn, slide #popin 20%
+    animation = windowsOut, 1, 3, windowIn, slide #popin 70%
+    animation = windowsMove, 1, 2.5, windowResize
+    animation = border, 1, 10, default
+    animation = borderangle, 1, 8, default
+    animation = fade, 1, 3, default
+    animation = workspaces, 1, 6, default
+}
+
+gestures {
+    workspace_swipe = true
+    workspace_swipe_fingers = 4
+    workspace_swipe_forever = true
+    workspace_swipe_cancel_ratio = 0.15
+}
+
+misc {
+    no_direct_scanout = false
+}
+
+binds {
+    workspace_back_and_forth = true
+}
+
+plugin {
+    hy3 {
+        tabs {
+            height = 5
+	    padding = 8
+	    render_text = false
+        }
+
+	autotile {
+            enable = true
+	    trigger_width = 800
+	    trigger_height = 500
+	}
+    }
+}
+
+monitor = , preferred, auto, 1
+
+layerrule = blur, wofi
+layerrule = blur, ironbar
+
+windowrulev2 = float, class:^(opensnitch_ui)$
+windowrulev2 = dimaround, class:^(opensnitch_ui)$
+windowrulev2 = float, class:^(org.kde.polkit-kde-authentication-agent-1)$
+windowrulev2 = dimaround, class:^(org.kde.polkit-kde-authentication-agent-1)$
+windowrulev2 = float, class:^(gcr-prompter)$
+windowrulev2 = dimaround, class:^(gcr-prompter)$
+windowrulev2 = float, class:^(org.freedesktop.impl.portal.desktop.kde)$
+windowrulev2 = size 1000 700, class:^(org.freedesktop.impl.portal.desktop.kde)$
+windowrulev2 = center, class:^(org.freedesktop.impl.portal.desktop.kde)$
+windowrulev2 = dimaround, class:^(org.freedesktop.impl.portal.desktop.kde)$
+
+windowrulev2 = float, class:^(AlacrittyFloating)$
+
+$mod = SUPER
+$launcher = wofi
+
+bind = $mod+SHIFT, m, exit
+
+bind = $mod, return, exec, alacritty
+bind = $mod+SHIFT, return, exec, alacritty --class AlacrittyFloating
+bind = $mod, grave, exec, $launcher
+bind = $mod+SHIFT, q, hy3:killactive
+
+bind = $mod, f, fullscreen, 1
+bind = $mod+SHIFT, f, fullscreen, 0
+bind = $mod+SHIFT, tab, togglefloating
+
+bind = $mod, d, hy3:makegroup, h
+bind = $mod, s, hy3:makegroup, v
+bind = $mod, z, hy3:makegroup, tab
+bind = $mod, a, hy3:changefocus, raise
+bind = $mod+SHIFT, a, hy3:changefocus, lower
+bind = $mod, e, hy3:expand, expand
+bind = $mod+SHIFT, e, hy3:expand, base
+bind = $mod, r, hy3:changegroup, opposite
+
+bindm = $mod, mouse:272, movewindow
+bindm = $mod, mouse:273, resizewindow
+bindn = , mouse:272, hy3:focustab, mouse
+bindn = , mouse_down, hy3:focustab, l, require_hovered
+bindn = , mouse_up, hy3:focustab, r, require_hovered
+
+bind = ,XF86AudioPlay, exec, playerctl play-pause
+bind = ,XF86AudioStop, exec, playerctl -a stop
+bind = ,XF86AudioNext, exec, playerctl next
+bind = ,XF86AudioPrev, exec, playerctl previous
+
+bind = $mod+SHIFT, s, exec, grim -g "$(slurp)" - | wl-copy
+
+bind = $mod, h, hy3:movefocus, l
+bind = $mod, j, hy3:movefocus, d
+bind = $mod, k, hy3:movefocus, u
+bind = $mod, l, hy3:movefocus, r
+bind = $mod, left, hy3:movefocus, l
+bind = $mod, down, hy3:movefocus, d
+bind = $mod, up, hy3:movefocus, u
+bind = $mod, right, hy3:movefocus, r
+
+bind = $mod+CONTROL, h, hy3:movefocus, l, visible
+bind = $mod+CONTROL, j, hy3:movefocus, d, visible
+bind = $mod+CONTROL, k, hy3:movefocus, u, visible
+bind = $mod+CONTROL, l, hy3:movefocus, r, visible
+bind = $mod+CONTROL, left, hy3:movefocus, l, visible
+bind = $mod+CONTROL, down, hy3:movefocus, d, visible
+bind = $mod+CONTROL, up, hy3:movefocus, u, visible
+bind = $mod+CONTROL, right, hy3:movefocus, r, visible
+
+bind = $mod+SHIFT, h, hy3:movewindow, l, once
+bind = $mod+SHIFT, j, hy3:movewindow, d, once
+bind = $mod+SHIFT, k, hy3:movewindow, u, once
+bind = $mod+SHIFT, l, hy3:movewindow, r, once
+bind = $mod+SHIFT, left, hy3:movewindow, l, once
+bind = $mod+SHIFT, down, hy3:movewindow, d, once
+bind = $mod+SHIFT, up, hy3:movewindow, u, once
+bind = $mod+SHIFT, right, hy3:movewindow, r, once
+
+bind = $mod+CONTROL+SHIFT, h, hy3:movewindow, l, once, visible
+bind = $mod+CONTROL+SHIFT, j, hy3:movewindow, d, once, visible
+bind = $mod+CONTROL+SHIFT, k, hy3:movewindow, u, once, visible
+bind = $mod+CONTROL+SHIFT, l, hy3:movewindow, r, once, visible
+bind = $mod+CONTROL+SHIFT, left, hy3:movewindow, l, once, visible
+bind = $mod+CONTROL+SHIFT, down, hy3:movewindow, d, once, visible
+bind = $mod+CONTROL+SHIFT, up, hy3:movewindow, u, once, visible
+bind = $mod+CONTROL+SHIFT, right, hy3:movewindow, r, once, visible
+
+bind = $mod, 1, workspace, 01
+bind = $mod, 2, workspace, 02
+bind = $mod, 3, workspace, 03
+bind = $mod, 4, workspace, 04
+bind = $mod, 5, workspace, 05
+bind = $mod, 6, workspace, 06
+bind = $mod, 7, workspace, 07
+bind = $mod, 8, workspace, 08
+bind = $mod, 9, workspace, 09
+bind = $mod, 0, workspace, 10
+bind = $mod, F1, workspace, 11
+bind = $mod, F2, workspace, 12
+bind = $mod, F3, workspace, 13
+bind = $mod, F4, workspace, 14
+bind = $mod, F5, workspace, 15
+bind = $mod, F6, workspace, 16
+bind = $mod, F7, workspace, 17
+bind = $mod, F8, workspace, 18
+bind = $mod, F9, workspace, 19
+bind = $mod, F10, workspace, 20
+
+bind = $mod+SHIFT, 1, movetoworkspacesilent, 01
+bind = $mod+SHIFT, 2, movetoworkspacesilent, 02
+bind = $mod+SHIFT, 3, movetoworkspacesilent, 03
+bind = $mod+SHIFT, 4, movetoworkspacesilent, 04
+bind = $mod+SHIFT, 5, movetoworkspacesilent, 05
+bind = $mod+SHIFT, 6, movetoworkspacesilent, 06
+bind = $mod+SHIFT, 7, movetoworkspacesilent, 07
+bind = $mod+SHIFT, 8, movetoworkspacesilent, 08
+bind = $mod+SHIFT, 9, movetoworkspacesilent, 09
+bind = $mod+SHIFT, 0, movetoworkspacesilent, 10
+bind = $mod+SHIFT, F1, movetoworkspacesilent, 11
+bind = $mod+SHIFT, F2, movetoworkspacesilent, 12
+bind = $mod+SHIFT, F3, movetoworkspacesilent, 13
+bind = $mod+SHIFT, F4, movetoworkspacesilent, 14
+bind = $mod+SHIFT, F5, movetoworkspacesilent, 15
+bind = $mod+SHIFT, F6, movetoworkspacesilent, 16
+bind = $mod+SHIFT, F7, movetoworkspacesilent, 17
+bind = $mod+SHIFT, F8, movetoworkspacesilent, 18
+bind = $mod+SHIFT, F9, movetoworkspacesilent, 19
+bind = $mod+SHIFT, F10, movetoworkspacesilent, 20
+
+bind = $mod+CONTROL, 1, hy3:focustab, index, 01
+bind = $mod+CONTROL, 2, hy3:focustab, index, 02
+bind = $mod+CONTROL, 3, hy3:focustab, index, 03
+bind = $mod+CONTROL, 4, hy3:focustab, index, 04
+bind = $mod+CONTROL, 5, hy3:focustab, index, 05
+bind = $mod+CONTROL, 6, hy3:focustab, index, 06
+bind = $mod+CONTROL, 7, hy3:focustab, index, 07
+bind = $mod+CONTROL, 8, hy3:focustab, index, 08
+bind = $mod+CONTROL, 9, hy3:focustab, index, 09
+bind = $mod+CONTROL, 0, hy3:focustab, index, 10

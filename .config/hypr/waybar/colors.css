@@ -1,0 +1,22 @@
+/** ********** Colors ********** **/
+@define-color background      #20262C;
+@define-color background-alt1 #2a323b;
+@define-color background-alt2 #353f4a;
+@define-color foreground      #ffffff;
+@define-color selected        #b4a1db;
+@define-color black           #000000;
+@define-color maroon          #800000;
+@define-color green           #008000;
+@define-color olive           #808000;
+@define-color navy            #000080;
+@define-color purple          #800080;
+@define-color teal            #008080;
+@define-color silver          #c0c0c0;
+@define-color grey	          #808080;
+@define-color red             #ff0000;
+@define-color lime            #00ff00;
+@define-color yellow          #ffff00;
+@define-color blue            #0000ff;
+@define-color fuchsia         #ff00ff;
+@define-color cyan            #00ffff;
+@define-color white           #ffffff;

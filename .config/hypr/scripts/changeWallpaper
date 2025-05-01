@@ -1,0 +1,31 @@
+#!/bin/bash
+
+CACHE=$HOME/.cache/current_wallpaper.png
+DIR=$HOME/Pictures/wallpapers/nord-background/
+PICS=($(ls ${DIR}))
+
+RANDOMPICS=${PICS[$RANDOM % ${#PICS[@]}]}
+
+WALL=${DIR}/${RANDOMPICS}
+cp ${WALL} ${CACHE}
+
+if [[ $(pidof swaybg) ]]; then
+  pkill swaybg
+fi
+
+#start swwww
+swww query || swww init || swww-daemon --format xrgb
+
+# swaybg -o * -m fill -i ${DIR}/${RANDOMPICS}
+#change-wallpaper using swww
+swww img ${DIR}/${RANDOMPICS} \
+  --transition-step 30 \
+  --transition-fps 60 \
+  --transition-type random \
+  --transition-duration 1 \
+  --transition-pos "$(hyprctl cursorpos)"
+
+# -----------------------------------------------------
+# Send notification
+# -----------------------------------------------------
+notify-send "Wallpaper updated" "With image ${RANDOMPICS}"
