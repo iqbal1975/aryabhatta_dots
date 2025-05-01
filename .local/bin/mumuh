@@ -1,0 +1,647 @@
+#!/bin/env bash
+
+# Define an array with text formatting options, to get rid of the single value per format thing.
+declare -A TEXTFORMATTING=(
+    [RED]=$(tput setaf 1)
+    [GREEN]=$(tput setaf 2)
+    [YELLOW]=$(tput setaf 3)
+    [BRIGHT]=$(tput bold)
+    [NORMAL]=$(tput sgr0)
+)
+
+# If arguments are given, prepare some of the functionality
+if [[ $# -gt 0 ]];
+then
+    usage() {
+        printf '%s\n' "######################################################################"
+        printf '%s\n' "################### ${TEXTFORMATTING[BRIGHT]}Archcraft Update Helper Script.${TEXTFORMATTING[NORMAL]}#####################"
+        printf '%s\n' "######################################################################"
+        printf '%s\n' "# This script is just a wrapper for yay, with the exception that     #"
+        printf '%s\n' "# if there were any errors, it allows you to copy them, neatly       #"
+        printf '%s\n' "# formatted for use as. or with a forum post, along with all the     #"
+        printf '%s\n' "# details required for requesting assistance.                        #"
+        printf '%s\n' "# It also allows you to set the required suddoers permissions in     #"
+        printf '%s\n' "# '/etc/sudoers.d'                                                   #"
+        printf '%s\n' "#                                                                    #"
+        printf '%s\n' "# Usage:                                                             #"
+        printf '%s\n' "#     * ${TEXTFORMATTING[BRIGHT]}--addsudoers${TEXTFORMATTING[NORMAL]}, or ${TEXTFORMATTING[BRIGHT]}-a${TEXTFORMATTING[NORMAL]}                                          #"
+        printf '%s\n' "#       Will add a file called ${TEXTFORMATTING[BRIGHT]}/etc/sudoers.d/manjaro-update-helper${TEXTFORMATTING[NORMAL]}  #"
+        printf '%s\n' "#       with entries to enable running this script as the current    #"
+        printf '%s\n' "#       user without a password.                                     #"
+        printf '%s\n' "#       ${TEXTFORMATTING[BRIGHT]}CARE MUST BE TAKED WITH THE ${TEXTFORMATTING[GREEN]}/etc/sudoers${TEXTFORMATTING[NORMAL]} FILE, AS DOING IT   #"
+        printf '%s\n' "#       INNCORRECTLY CAN LEAD TO BEING LOCKED OUT OF THE SYSTEM.     #"
+        printf '%s\n' "#       ${TEXTFORMATTING[RED]}PLEASE BE ${TEXTFORMATTING[BRIGHT]}VERY${TEXTFORMATTING[NORMAL]}${TEXTFORMATTING[RED]} CAREFUL.${TEXTFORMATTING[NORMAL]}                                      #"
+        printf '%s\n' "#     * ${TEXTFORMATTING[BRIGHT]}--skipbackup${TEXTFORMATTING[NORMAL]}, or ${TEXTFORMATTING[BRIGHT]}-s${TEXTFORMATTING[NORMAL]}                                          #"
+        printf '%s\n' "#       This will cause the update process to skip the backup step   #"
+        printf '%s\n' "#       for the update.                                              #"
+        printf '%s\n' "#     * ${TEXTFORMATTING[BRIGHT]}--custombackupcommand${TEXTFORMATTING[NORMAL]}, or ${TEXTFORMATTING[BRIGHT]}-c${TEXTFORMATTING[NORMAL]}                                 #"
+        printf '%s\n' "#       This argument allows for specifying a custom backup command, #"
+        printf '%s\n' "#       for if you want to use something other than the default      #"
+        printf '%s\n' "#       timeshift one, or even is you use something other than       #"
+        printf '%s\n' "#       timeshift.                                                   #"
+        printf '%s\n' "#       ${TEXTFORMATTING[BRIGHT]}NOTE:${TEXTFORMATTING[NORMAL]}                                                        #"
+        printf '%s\n' "#       If ${TEXTFORMATTING[BRIGHT]}--skipbackup${TEXTFORMATTING[NORMAL]}, or ${TEXTFORMATTING[BRIGHT]}-s${TEXTFORMATTING[NORMAL]} is specified, then specifying this    #"
+        printf '%s\n' "#       will have no effect.                                         #"
+        printf '%s\n' "#     * ${TEXTFORMATTING[BRIGHT]}--skiprphansremove${TEXTFORMATTING[NORMAL]}                                           #"
+        printf '%s\n' "#       If this argument is specified, muumuh will skip the removal  #"
+        printf '%s\n' "#       of orphan packages after a successful upgrade.               #"
+        printf '%s\n' "#     * ${TEXTFORMATTING[BRIGHT]}--help${TEXTFORMATTING[NORMAL]}, or ${TEXTFORMATTING[BRIGHT]}-h${TEXTFORMATTING[NORMAL]}                                                #"
+        printf '%s\n' "#       Show this help and exit.                                     #"
+        printf '%s\n' "#     If no arguments are passed, the script performs its main       #"
+        printf '%s\n' "#     functionality.                                                 #"
+        printf '%s\n' "# Examples:                                                          #"
+        printf '%s\n' "#     * To add the current user to the sudoers list:                 #"
+        printf '%s\n' "#        mumu --addsudoers                                           #"
+        printf '%s\n' "#          OR                                                        #"
+        printf '%s\n' "#        mumu -a                                                     #"
+        printf '%s\n' "#     * If you wish to skip performing backups for this execution:   #"
+        printf '%s\n' "#        mumu --skipbackup                                           #"
+        printf '%s\n' "#          OR                                                        #"
+        printf '%s\n' "#        mumu -s                                                     #"
+        printf '%s\n' "#     * If you want to use a custom command:                         #"
+        printf '%s\n' "#        mumu --custombackupcommand=<custom command>                 #"
+        printf '%s\n' "#          OR                                                        #"
+        printf '%s\n' "#        mumu -c <custom command>                                    #"
+        printf '%s\n' "#     * If you want to skip removing orphan pakackages:              #"
+        printf '%s\n' "#        mumu --skiprphansremove                                     #"
+        printf '%s\n' "######################################################################"
+        exit 0
+    }
+
+    addsudoers () {
+        # Lets get the username to add to the sudoers list
+        USERNAMETOSUDOERS=$(whoami)
+        # Only continue if it is not root
+        if [ "$USERNAMETOSUDOERS" == "root" ]; then
+            printf '%s\n' "${TEXTFORMATTING[RED]}${TEXTFORMATTING[BRIGHT]}SCRIPT SHOULDN'T BE RUN AS ROOT. EXITING.${TEXTFORMATTING[NORMAL]}"
+            exit 9
+        fi
+        sudo install --owner=root --group=root --mode=0440 /dev/null /etc/sudoers.d/archcraft-update-helper
+        SUDOERSFILECREEATION=$?
+        if [[ ${SUDOERSFILECREEATION} -eq 0 ]]; then
+            printf '%s\n' "${TEXTFORMATTING[GREEN]}Successfully created file ${TEXTFORMATTING[BRIGHT]}/etc/sudoers.d/archcraft-update-helper${TEXTFORMATTING[NORMAL]}"
+        else
+            printf '%s\n' "${TEXTFORMATTING[RED]}Failed create file ${TEXTFORMATTING[BRIGHT]}/etc/sudoers.d/archcraft-update-helper${TEXTFORMATTING[NORMAL]} ${TEXTFORMATTING[RED]}due to not having the required permissions."
+            exit 8
+        fi
+        SUDOERSENTRY="${USERNAMETOSUDOERS} ALL=(ALL) NOPASSWD: /usr/bin/timeshift *,/usr/bin/yay"
+        echo "${SUDOERSENTRY}" | sudo tee --append /etc/sudoers.d/manjaro-update-helper > /dev/null
+        SUDOERSENTRYADDED=$?
+        if [[ $SUDOERSENTRYADDED -eq 0 ]]; then
+                printf '%s\n' "sudoers entry created successfully in ${TEXTFORMATTING[BRIGHT]}/etc/sudoers.d/archcraft-update-helper${TEXTFORMATTING[NORMAL]}."
+        else
+                printf '%s\n' "${TEXTFORMATTING[RED]}Failed to create sudoers entry for user ${TEXTFORMATTING[BRIGHT]}${USERNAMETOSUDOERS}${TEXTFORMATTING[NNORMAL]}${TEXTFORMATTING[RED]} in ${TEXTFORMATTING[BRIGHT]}/etc/sudoers.d/archcraft-update-helper${TEXTFORMATTING[NORMAL]}."
+        fi
+        # Some housekeeping for this functionality, the adding sudoers functionality.
+        unset USERNAMETOSUDOERS USEREXISTS SUDOERSENTRY SUDOERSFILECREEATION SUDOERSENTRYADDED
+        exit 0
+    }
+    # Since arguments given, parse them
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            --help|-h)
+                usage
+            ;;
+            --addsudoers|-a)
+                addsudoers "$2"
+            ;;
+            --skipbackup|-s)
+                SKIPBACKUP=true
+                shift
+            ;;
+            --custombackupcommand=*|-c)
+                CUSTOMBUARG=$1
+                if [[ "$CUSTOMBUARG" == *"rm"* ]]; then
+                    SKIPBACKUP=true
+                    printf '%s\n' "${TEXTFORMATTING[RED]}${TEXTFORMATTING[YELLOW]}Potentially dangerous custom command specified. Ignoring and contnuing.${TEXTFORMATTING[NORMAL]}"
+                else
+                    CUSTOMBUCMD=$(echo "${CUSTOMBUARG}" | cut -f2 -d=)
+                fi
+                shift
+            ;;
+            --skiprphansremove)
+                SKIPORPHANRM=1
+                shift
+            ;;
+        esac
+    done
+fi
+# Configure a few variables to be used throughout the script
+RUNTIMESTAMP=$(date +%Y.%m.%d@%Hh%Mm)
+RUNDATE=$(echo "$RUNTIMESTAMP" | awk -F'@' '{print $1}')
+
+# Create the logs directory
+if [[ ! -d "/var/log/archcraft-update" ]];
+then
+    sudo mkdir --mode=770 "/var/log/archcraft-update"
+    sudo chgrp wheel "/var/log/archcraft-update"
+fi
+if [[ -d "/var/log/archcraft-update/" ]];
+then
+    mkdir --mode=755 "/var/log/archcraft-update/logs.${RUNTIMESTAMP}"
+    sudo chgrp wheel "/var/log/archcraft-update/logs.${RUNTIMESTAMP}"
+fi
+if [[ -d "/var/log/archcraft-update/logs.${RUNTIMESTAMP}" ]];
+then
+    LOGSDIR="/var/log/archcraft-update/logs.${RUNTIMESTAMP}"
+fi
+
+# Create the log files
+if [ -z ${LOGSDIR+x} ];
+then
+    printf '%s\n' "${TEXTFORMATTING[RED]}${TEXTFORMATTING[BRIGHT]}\$LOGSDIR${TEXTFORMATTING[NORMAL]}${TEXTFORMATTING[RED]} is unset. Cannot log process.${TEXTFORMATTING[NORMAL]}" | tee /dev/tty | systemd-cat --identifier=mumuh --priority=warn
+    LOGSDIR=""
+else
+    touch "${LOGSDIR}/system-upgrade.output" && SYSDUPLOGFILE="${LOGSDIR}/system-upgrade.output"
+    touch "${LOGSDIR}/aur-upgrade.output" && AURUPDLOGFILE="${LOGSDIR}/aur-upgrade.output"
+    UPGRADEERRORS=0
+fi
+
+# Make sure the script isnt's being run as root
+if [[ "$(id -u)" -eq "0" ]];
+then
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}You are attempting to run the script as root which isn't allowed. Exiting.${TEXTFORMATTING[NORMAL]}"
+    printf "[%s]: Attempting to run the script as root. Exiting.\n" "$(date +%Y.%m.%d@%H:%M)" >> "${SYSDUPLOGFILE}"
+    exit 1
+fi
+
+# For making eval statements safer later in the script
+function token_quote {
+    local quoted=()
+    for token; do
+        quoted+=( "$(printf '%q' "$token")" )
+    done
+    printf '%s\n' "${quoted[*]}"
+}
+
+# Check that there are updates, and confirm with the use whether to apply them or not.
+UPDATES_AVAILABLE=$(checkupdates | head -n 1  | awk '{print $1}')
+printf "[%s]: %s Official packages to upgrade:\n" "$(date +%Y.%m.%d@%H:%M:S)" "${UPDATES_AVAILABLE}" >> "${SYSDUPLOGFILE}"
+[[ $UPDATES_AVAILABLE -gt 0 ]] && read -r -p "There are ${TEXTFORMATTING[BRIGHT]}${UPDATES_AVAILABLE}${TEXTFORMATTING[NORMAL]} updates available, continue? [Y/n]: " CONTINUEUPDATE
+CONTINUEUPDATE=${CONTINUEUPDATE:-Y}
+if [[ ${CONTINUEUPDATE} =~ [nN] ]];
+then
+    printf "[%s]: Upgrade cancelled.\n" "$(date +%Y.%m.%d@%H:%M:S)" >> "${SYSDUPLOGFILE}"
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}Upgrade cancelled.${TEXTFORMATTING[NORMAL]}" |  systemd-cat --identifier=mumuh && exit 7
+fi
+
+# Functionality to accomplish this has been added with the --addsudoers or -a argument
+# --------------------------------------------------------------------------------------------------
+# Make the timeshift backup
+# If wished, the following can be added to /etc/sudoers.d/upgradescript to allow this command to run without requiring a password:
+#           <username> ALL=(ALL) NOPASSWD: /usr/bin/timeshift *
+#
+# Replace '<username>' with the user name the script is bein run from.
+# This will allow all "timeshift" commands to be run with 'sudo' withoout requiring a password
+# If choosing to add the current user to sudoers, with the '-a' or '--addsudoers' arguments, this will be done automatically.
+# BUT BE CAREFUL WITH sudoers. You can lock yourself out of your system with it. Hence the recommendation to create a new file in /etc/sudoers.d/
+
+###
+# START mirror checking section
+###
+MIRRORSTATUS=$(shiny-mirrors --status)
+UNSYNCDMIRRORS=0
+while IFS= read -r line; do
+    if [[ "$line" == *"--"* ]];
+    then
+        UNSYNCDMIRRORS=$(echo "${UNSYNCDMIRRORS}+1" | bc)
+    fi
+done <<< "${MIRRORSTATUS}"
+if [[ "${UNSYNCDMIRRORS}" -gt "0" ]];
+then
+    read -r -p "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}${UNSYNCDMIRRORS} mirrors remain unsynchronized and could cause problems.${TEXTFORMATTING[NORMAL]} [y/N]: " CONTTINUECHOICE
+    if [[ ${CONTTINUECHOICE} =~ [Nn] ]];
+    then
+        printf "There were %s unsynchronised mirrors. Not continuing." "${UNSYNCDMIRRORS}" >> "${SYSDUPLOGFILE}"
+    elif [[ ${COPYOFFICIALCHOICE} =~ [Yy] ]];
+    then
+        printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}You are conrinuing even though you are using unsynchronised mirrors.${TEXTFORMATTING[RED]}"
+        printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}This is dangerous and known to cause problems and thus not recommended.${TEXTFORMATTING[RED]}"
+        read -r -p "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[YELLOW]}Please confirm if you wish to continue by pressing C.${TEXTFORMATTING[RED]} [C/N]: " CONFIRMCONTINUECHOICE
+        if [[ ${CONFIRMCONTINUECHOICE} != "C" ]];
+        then
+            printf '%s\n' "Did not confirm. Exiting."
+            exit 12
+        fi
+
+    fi
+    exit 11
+fi
+###
+# END mirror checking section
+###
+
+###
+# START backup section
+###
+if [[ -z ${SKIPBACKUP+x} ]]; # Check if backup creating specified.
+then
+    printf '%s\n' "* ${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[YELLOW]}Not skipping backup creation.${TEXTFORMATTING[NORMAL]}" | tee /dev/tty | systemd-cat --identifier=mumuh
+    printf "[%s]: Not skipping backup creation.\n" "$(date +%Y.%m.%d@%H:%M:S)" >> "${SYSDUPLOGFILE}"
+    if [[ -v CUSTOMBUCMD ]]; # Check if custom backup command specified.
+    then
+        BACKUPCMD=$CUSTOMBUCMD
+    else
+        printf '%s\n' "> ${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[YELLOW]}No custom backup command specified.${TEXTFORMATTING[NORMAL]} <" | tee /dev/tty | systemd-cat --identifier=mumuh
+        if ! command -v sudo timeshift 1> /dev/null 2> /dev/null
+        then
+            printf '%s\n' "> ${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[YELLOW]}Timeshift ${TEXTFORMATTING[RED]}not${TEXTFORMATTING[YELLOW]} found.${TEXTFORMATTING[NORMAL]} <" | tee /dev/tty | systemd-cat --identifier=mumuh
+            printf "[%s]: Timeshift not founnd.\n" "$(date +%Y.%m.%d@%H:%M:S)" >> "${SYSDUPLOGFILE}"
+            echo
+            printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}Exiting.${TEXTFORMATTING[NORMAL]}" | tee /dev/tty | systemd-cat --identifier=mumuh
+            printf "[%s]: Exiting.\n" "$(date +%Y.%m.%d@%H:%M:S)" >> "${SYSDUPLOGFILE}"
+            exit 2
+        else
+            BACKUPCMD="sudo timeshift --create --comments \"$(date +%Y.%m.%d@%H:%M)\"' - Pre-update'"
+        fi
+    fi
+else # backup creation skipped
+    printf "%sSkipping backup creation.%s\n" "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[YELLOW]}" "${TEXTFORMATTING[NORMAL]}"
+    printf "[%s]: Skipping backup creation.\n" "$(date +%Y.%m.%d@%H:%M:S)" >> "${SYSDUPLOGFILE}"
+fi
+
+if [[ -n ${BACKUPCMD+x} ]];
+then
+    printf "%sUsing %s%s to create the backup snapshot." "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[YELLOW]}" "${CUSTOMBUCMD}" "${TEXTFORMATTING[NORMAL]}"
+    printf "[%s]: Using %s to create the backup snapshot.\n" "$(date +%Y.%m.%d@%H:%M:S)" "${CUSTOMBUCMD}" >> "${SYSDUPLOGFILE}"
+    eval "${BACKUPCMD}"
+    BACKUP_COMMAND_RESULT=$?
+fi
+if [[ -n ${SKIPBACKUP} ]]; # don't create backup
+then
+    # However, if it was given, set the output as a success, so the rest of the script can carry on.
+    BACKUP_COMMAND_RESULT=0
+    printf "%sSkipping backup creation.%s\n" "${TEXTFORMATTING[YELLOW]}${TEXTFORMATTING[BRIGHT]}" "${TEXTFORMATTING[NORMAL]}"
+    printf "[%s]: Skipping backup creation.\n" "$(date +%Y.%m.%d@%H:%M:S)" >> "${SYSDUPLOGFILE}"
+fi
+###
+# END backup section
+###
+
+###
+# START disable sleep.target, suspend.target, hibernate.target, hybrid-sleep.target for the update section
+###
+printf '%s\n' "${TEXTFORMATTING[BRIGHT]}Disabling sleep, hybernate and suspend for duration of the update.${TEXTFORMATTING[NORMAL]}"
+# Disabling sleep
+if [[ $(sudo systemctl mask sleep.target) -eq 0 ]];
+then
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[GREEN]}Successfully disabled sleep functionality for the update process.${TEXTFORMATTING[NORMAL]}"
+else
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}An error occured while disabling sleep functionality for the update process.${TEXTFORMATTING[NORMAL]}"
+fi
+
+# Disabling suspend
+if [[ $(sudo systemctl mask suspend.target) -eq 0 ]];
+then
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[GREEN]}Successfully disabled suspend functionality for the update process.${TEXTFORMATTING[NORMAL]}"
+else
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}An error occured while disabling suspend functionality for the update process.${TEXTFORMATTING[NORMAL]}"
+fi
+
+# Disabling hibernate
+if [[ $(sudo systemctl mask hibernate.target) -eq 0 ]];
+then
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[GREEN]}Successfully disabled hibernate functionality for the update process.${TEXTFORMATTING[NORMAL]}"
+else
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}An error occured while disabling hibernate functionality for the update process.${TEXTFORMATTING[NORMAL]}"
+fi
+# Disabling hybrid-sleep
+if [[ $(sudo systemctl mask hybrid-sleep.target) -eq 0 ]];
+then
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[GREEN]}Successfully disabled hybrid-sleep functionality for the update process.${TEXTFORMATTING[NORMAL]}"
+else
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}An error occured while disabling hybrid-sleep functionality for the update process.${TEXTFORMATTING[NORMAL]}"
+fi
+
+###
+# END disable sleep.target, suspend.target, hibernate.target, hybrid-sleep.target for the update section
+###
+
+
+###
+# START upgrade section
+###
+# If the backup was successful, continue with the upgrade
+if [[ $BACKUP_COMMAND_RESULT -eq 0 ]];
+then
+    if [[ -z ${SKIPBACKUP+x} ]];
+    then
+        printf "[%s]: Pre-upgrade backup snapshot successfully created.\n" "$(date +%Y.%m.%d@%H:%M:%S)" >> "${SYSDUPLOGFILE}"
+        printf "%sPre-upgrade backup snapshot successfully created. %sContinuing with upgrade...%s\n"  "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[GREEN]}" "${TEXTFORMATTING[NORMAL]}${TEXTFORMATTING[GREEN]}" "${TEXTFORMATTING[NORMAL]}"
+    fi
+    # PAMAC_CLI_AUTH=1 pamac upgrade --force-refresh --enable-downgrade > >(tee --append "${SYSDUPLOGFILE}")
+    yay -Syyu > >(tee --append "${SYSDUPLOGFILE}")
+    UPGRADE_OFFICIAL_RESULT=$?
+    # Check if the official update from the repositories is successful, and if so continue with the AUR upgrade.
+    if [ "${UPGRADE_OFFICIAL_RESULT}" -eq "0" ];
+    then
+        printf "[%s]: Packages upgraded successfully from the official repositories.\n" "$(date +%Y.%m.%d@%H:%M)" >> "${SYSDUPLOGFILE}"
+        if command -v notify-send 1> /dev/null 2> /dev/null;
+        then
+            notify-send --icon=checkmark --app-name="MUMUH" "Official package upgrade" "Using, \<b\><code>yay -Syyu</code>\<\/b\>, successfully finished."
+        else
+            printf "%sOfficial package upgrade \n\nUsing, %syay -Syyu%s%s, successfully finished.%s" "${TEXTFORMATTING[GREEN]}" "${TEXTFORMATTING[BRIGHT]}" "${TEXTFORMATTING[NORMAL]}" "${TEXTFORMATTING[GREEN]}" "${TEXTFORMATTING[NORMAL]}"
+        fi
+        if [ -z ${LOGSDIR+x} ];
+        then
+            echo "\$LOGSDIR is unset. Cannot log process";
+            LOGSDIR=""
+        else
+            touch "$LOGSDIR""/aur-upgrade.output";
+            AURUPDLOGFILE=$LOGSDIR"/aur-upgrade.output";
+        fi
+        # Let's update AUR packages now.
+        printf "[%s]: AUR Development packages to upgrade:\n" "$(date +%Y.%m.%d@%H:%M:%S)" >> "${AURUPDLOGFILE}"
+        # PAMAC_CLI_AUTH=1 pamac upgrade --enable-downgrade --aur --devel  > >(tee --append "${AURUPDLOGFILE}")
+        yay -Syyu --devel  > >(tee --append "${AURUPDLOGFILE}")
+        UPGRADE_AUR_RESULT=$?
+        # Check if AUR packages' upgrade was successful, and if so, continue with merging .pacnew files.
+        if [ "${UPGRADE_AUR_RESULT}" -eq "0" ];
+        then
+            printf "[%s]: Development packages upgraded successfully from the AUR.\n" "$(date +%Y.%m.%d@%H:%M:%S)" >> "${AURUPDLOGFILE}"
+            if command -v notify-send 1> /dev/null 2> /dev/null;
+            then
+                notify-send --icon=checkmark --app-name="MUMUH" --expire-time=5000 "AUR package upgrade" "Using, \<b\>yay -Syyu --devel\<\/b\>, successfully finished."
+            else
+                printf '%s\n' "${TEXTFORMATTING[GREEN]}AUR development package upgrade \n\nUsing, ${TEXTFORMATTING[BRIGHT]}yay -Syyu --devel${TEXTFORMATTING[NORMAL]}, successfully finished."
+            fi
+            printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[GREEN]}AUR development package upgrade, using yay -Syyu --devel, successfully finished.${TEXTFORMATTING[NORMAL]}" | tee /dev/tty | systemd-cat --identifier=mumuh --priority=info
+            # An now, we have to merge any .pacnew files.
+            sudo DIFFPROG=meld pacdiff
+            NEWMERGE_RESULT=$?
+            # Check if merging .pacnew files were successful and if so, show success notification.
+            if [[ $NEWMERGE_RESULT -eq 0 ]];
+            then
+                if command -v notify-send 1> /dev/null 2> /dev/null;
+                then
+                    notify-send --icon=checkmark --app-name="MUMUH" --expire-time=5000 ".pacnew files successfully merged."
+                else
+                    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[GREEN]}.pacnew files successfully merged.${TEXTFORMATTING[NORMAL]}"
+                fi
+                printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[GREEN]}.pacnew files successfully merged.${TEXTFORMATTING[NORMAL]}" > systemd-cat --identifier=mumuh --priority=info
+                printf "[%s]: Successfully merged .pacnew files.\n" "$(date +%Y.%m.%d@%H:%M:%S)" >> "${SYSDUPLOGFILE}"
+            else
+                printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}An error occurred during merging of the .pacnew files.${TEXTFORMATTING[NORMAL]}" | tee /dev/tty | systemd-cat --identifier=mumuh --priority=err
+                exit 6
+            fi
+        # Show notification that the AUR packages' update was unsuccessful.
+        else
+            if command -v notify-send 1> /dev/null 2> /dev/null;
+            then
+                notify-send --urgency=critical --icon=error --app-name="MUMUH" "AUR development package upgrade" "Using, \<b\>yay -Syyu --devel\<\/b\>, failed.\<br /\>\<i\>Human intervention required.\<\/b\>\<\/i\>\<br\/\>\<\/b\>Not continuing.\<\/b\>"
+            else
+                printf "%s%sSuccessfully merged .pacnew files.${TEXTFORMATTING[NORMAL]}\n" "${TEXTFORMATTING[BRIGHT]}" "${TEXTFORMATTING[GREEN]}"
+            fi
+            printf "[%s]: Successfully merged .pacnew files.\n" "$(date +%Y.%m.%d@%H:%M:%S)" >> "${SYSDUPLOGFILE}"
+            printf "[%s]: AUR development package using yay -Syyu --devel failed.\n" "$(date +%Y.%m.%d@%H:%M:%S)" >> "${SYSDUPLOGFILE}"
+            printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}AUR development package using yay -Syyu --devel failed.${TEXTFORMATTING[NORMAL]}" | tee /dev/tty | systemd-cat --identifier=mumuh --priority=err
+            exit 5
+        fi
+    # Show notification that official packackages' updates was unsuccessful.
+    else
+        if command -v notify-send 1> /dev/null 2> /dev/null;
+        then
+            notify-send --urgency=critical --icon=error --app-name="MUMUH" "AUR development package upgrade" "Using, yay -Syyu --devel\<b\>\<\/b\>, failed.\<br /\>\<i\>Human intervention required.\<\/b\>\<\/i\>\<br\/\>\<\/b\>Not continuing.\<\/b\>"
+        else
+            printf "%sAUR development package upgrade using, %byay -Syyu --devel%c, %sfailed.\nHuman intervention required.\nNot continuing.\n" "${TEXTFORMATTING[RED]}" "${TEXTFORMATTING[BRIGHT]}" "${TEXTFORMATTING[NORMAL]}${TEXTFORMATTING[RED]}" "${TEXTFORMATTING[NORMAL]}"
+        fi
+        UPGRADEERRORS=$(echo "${UPGRADEERRORS} + 1" | bc)
+        exit 4
+    fi
+else # If timeshift wasn't successful, notify, log and exit.
+    echo
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}!!! An error occurred while making the pre-update backup snapshot. Not continuing. !!!${TEXTFORMATTING[NORMAL]}" | tee /dev/tty | systemd-cat --identifier=mumuh --priority=err
+    echo
+    notify-send --urgency=critical --icon=error --app-name="MUMUH" "Backup creation" "Using, ${BACKUPCMD}\<b\>\<\/b\>, failed.\<br /\>\<i\>Human intervention required.\<\/b\>\<\/i\>\<br\/\>\<\/b\>Not continuing.\<\/b\>"
+    exit 3
+fi
+
+###
+# START enable sleep.target, suspend.target, hibernate.target, hybrid-sleep.target for the update section
+###
+printf '%s\n' "${TEXTFORMATTING[BRIGHT]}Enabling Sleep, Hybernate and Suspend.${TEXTFORMATTING[NORMAL]}"
+# Disabling slep
+if [[ $(sudo systemctl unmask sleep.target) -eq 0 ]];
+then
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[GREEN]}Successfully enabled Sleep functionality.${TEXTFORMATTING[NORMAL]}"
+else
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}An error occured while enabling Sleep functionality.${TEXTFORMATTING[NORMAL]}"
+fi
+
+# Enabling suspend
+if [[ $(sudo systemctl unmask suspend.target) -eq 0 ]];
+then
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[GREEN]}Successfully enabled Suspend functionality.${TEXTFORMATTING[NORMAL]}"
+else
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}An error occured while enabling Suspend functionality.${TEXTFORMATTING[NORMAL]}"
+fi
+
+# Enabling hibernate
+if [[ $(sudo systemctl unmask hibernate.target) -eq 0 ]];
+then
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[GREEN]}Successfully enabled Hibernate functionality.${TEXTFORMATTING[NORMAL]}"
+else
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}An error occured while enabling Hibernate functionality.${TEXTFORMATTING[NORMAL]}"
+fi
+
+# Enabling hybrid-sleep
+if [[ $(sudo systemctl unmask hybrid-sleep.target) -eq 0 ]];
+then
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[GREEN]}Successfully enabled Hybrid-Sleep functionality.${TEXTFORMATTING[NORMAL]}"
+else
+    printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}An error occured while enabling Hybrid-Sleep functionality.${TEXTFORMATTING[NORMAL]}"
+fi
+###
+# END disable sleep.target, suspend.target, hibernate.target, hybrid-sleep.target for the update section
+###
+
+###
+# END upgrade section
+###
+
+###
+# START orphan cleaning section
+###
+if [[ "${UPGRADE_OFFICIAL_RESULT}" -eq "0" ]] && [[ "${UPGRADE_AUR_RESULT}" -eq "0" ]] && [[ "${NEWMERGE_RESULT}" -eq "0" ]];
+then
+    if PAMAC_CLI_AUTH=1 pamac remove --orphans;
+    then
+        if command -v notify-send 1> /dev/null 2> /dev/null;
+        then
+            notify-send --icon=checkmark --app-name="MUMUH" --expire-time=5000 "Successfully removed Orphan packages."
+        else
+            printf "%sFailed to remove Orphan packages.\n%sHuman intervention required.\nNot continuing.\n" "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}" "${TEXTFORMATTING[NORMAL}"
+        fi
+    else
+        if command -v notify-send 1> /dev/null 2> /dev/null;
+        then
+            notify-send --urgency=critical --icon=error --app-name="MUMUH" "Removing Orphan packages" "Using, pamac remove --orphans\<b\>\<\/b\>, failed."
+        else
+            printf "%sOrphan package removal, using %spamac remove --orphans%s failed.\n" "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}" "${TEXTFORMATTING[BOLD]}" "${TEXTFORMATTING[NORMAL}"
+        fi
+    fi
+else
+    printf "%sOrphan packages could not be removed.\n%sHuman intervention required.\nNot continuing." "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}" "${TEXTFORMATTING[NORMAL}"
+    exit 13
+fi
+###
+# END orphan cleaning section
+###
+
+###
+# START orphan cleaning section
+###
+if [ ${SKIPORPHANRM+x} ] && [[ "${SKIPORPHANRM}" -eq "1" ]]; then # $SKIPORPANRM variable not set and not equal to 1 (or true)
+    if [[ "${UPGRADE_OFFICIAL_RESULT}" -eq "0" ]] && [[ "${UPGRADE_AUR_RESULT}" -eq "0" ]] && [[ "${NEWMERGE_RESULT}" -eq "0" ]];
+    then
+        if PAMAC_CLI_AUTH=1 pamac remove --orphans;
+        then
+            if command -v notify-send 1> /dev/null 2> /dev/null;
+            then
+                notify-send --icon=checkmark --app-name="MUMUH" --expire-time=5000 "Successfully removed orphan packages."
+            else
+                printf "%sFailed to remove orphan packages.\n%sHuman intervention required.\nNot continuing.\n" "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}" "${TEXTFORMATTING[NORMAL}"
+            fi
+        else
+            if command -v notify-send 1> /dev/null 2> /dev/null;
+            then
+                notify-send --urgency=critical --icon=error --app-name="MUMUH" "Removing orphan packages" "Using, pamac remove --orphans\<b\>\<\/b\>, failed."
+            else
+                printf "%sOrphan package removal, using %spamac remove --orphans%s failed.\n" "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}" "${TEXTFORMATTING[BOLD]}" "${TEXTFORMATTING[NORMAL}"
+            fi
+        fi
+    else
+        printf "%sOrphan packages could not be removed.\n%sHuman intervention required.\nNot continuing." "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[RED]}" "${TEXTFORMATTING[NORMAL}"
+        exit 13
+    fi
+fi
+###
+# END orphan cleaning section
+###
+
+# Get the information required for the logs as well as a generated forum post
+SYSTEMINFO=$(inxi --admin --verbosity=7 --filter --no-host --width)
+
+if [[ "${UPGRADEERRORS}" -gt "0" ]];
+then
+    # If there were errors with the official packages' upgrade, show prompt about copying the process' output to the clipboard.
+    if [[ $UPGRADE_OFFICIAL_RESULT -ne 0 ]];
+    then
+        read -r -p "There were errors while performing the updates from the official repositories. Copy result? [y/N]: " COPYOFFICIALCHOICE
+        COPYOFFICIALCHOICE=${COPYOFFICIALCHOICE:-N}
+    fi
+    # If there were errors with the AUR packages' upgrade, show prompt about copying the process' output to the clipboard.
+    if [[ $UPGRADE_AUR_RESULT -ne 0 ]];
+    then
+        read -r -p "There were errors while performing the updates from the AUR. Copy result? [y/N]: " COPYAURCHOICE
+        COPYAURCHOICE=${COPYAURCHOICE:-N}
+    fi
+fi
+###
+# START post generation section
+###
+
+# Compose a forum message.
+if [[ $COPYOFFICIALCHOICE =~ [Yy] ]] || [[ $COPYAURCHOICE =~ [Yy] ]];
+then
+    MESSAGE='I encountered errors during the last update, which I performed on  **`'${RUNDATE}'`**. Please find my information below:
+
+'
+fi
+
+# If chosen, add official update output.
+if [[ $COPYOFFICIALCHOICE =~ [Yy] ]];
+then
+    UPGRADEOFFPKGAMNT=$(head -1 "${SYSDUPLOGFILE}" | awk '{print $2}')
+    if [[ "${UPGRADEOFFPKGAMNT}" -eq "1" ]];
+    then
+        SYSUPGDTITLE="${UPGRADEOFFPKGAMNT} package updated:"
+    elif [[ "${UPGRADEOFFPKGAMNT}" -gt "1" ]];
+    then
+        SYSUPGDTITLE="${UPGRADEOFFPKGAMNT} packages updated:"
+    fi
+    MESSAGE+="##### \`pamac upgrade --force-refresh --enable-downgrade\`:
+
+[details=View details]
+
+##### ${SYSUPGDTITLE}
+
+~~~
+$(cat "${SYSDUPLOGFILE}")
+~~~
+[/details]
+
+"
+fi
+
+# If chosen, add AUR packages' output.
+if [[ $COPYAURCHOICE =~ [Yy] ]];
+then
+    UPGRADEAURPKGAMNT=$(head -1 "${AURUPDLOGFILE}" | awk '{print $2}')
+    if [[ "${UPGRADEAURPKGAMNT}" -eq "1" ]];
+    then
+        AURUPGDTITLE="${UPGRADEAURPKGAMNT} package updated:"
+    elif [[ "${UPGRADEAURPKGAMNT}" -gt "1" ]];
+    then
+        AURUPGDTITLE="${UPGRADEAURPKGAMNT} packages updated:"
+    fi
+    MESSAGE+="##### \`pamac upgrade --enable-downgrade --aur --devel\`:
+
+[details=View details]
+
+##### ${AURUPGDTITLE}
+
+~~~
+$(cat "$AURUPDLOGFILE")
+~~~
+[/details]
+
+"
+fi
+
+# Add system information gathered above, if any of the outputs are copied.
+if [[ $COPYOFFICIALCHOICE =~ [Yy] ]] || [[ $COPYAURCHOICE =~ [Yy] ]];
+then
+    MESSAGE+="##### My **\`inxi --admin --verbosity=7 --filter --no-host --width\`**:
+
+~~~
+$SYSTEMINFO
+~~~
+
+##### \`pacman-mirrors --status\`:
+
+[details=View details]
+
+~~~
+$MIRRORSTATUS
+~~~
+
+[/details]
+
+
+***
+
+# PLEASE REMOVE THIS TEXT AND ADD YOUR OWN DESCRIPTION HERE, BELOW THE LINE!
+
+"
+fi
+###
+# END forum post generation section
+###
+
+# if [[ $? = 0 ]];
+# then
+#     echo
+#     echo "Message to start forum topic successfully copied to clipboard.
+# Please visit https://forum.manjaro.org/ and start a new support topic and paste the copied messaage ass the main post, but only after checking if the issue hasn't been asked and resolved already.
+# Remember that a forum account is required for creating a new support request and that the forum is manned by volunteers, so no demand can be madee on their time.
+# Please see https://forum.manjaro.org/t/howto-request-support/91463 for more information and guides to request support.
+# "
+# fi
+# Some of the logs are only stored in RAM, so will be cleared on shutdown or restart, but let's take care of older log files.
+printf '%s\n' "${TEXTFORMATTING[BRIGHT]}${TEXTFORMATTING[YELLOW]}Cleaning older log files...${TEXTFORMATTING[NORMAL]}"
+if ls -A /var/log/manjaro-update-helper 1> /dev/null 2> /dev/null; then
+    (cd /var/log/manjaro-update-helper && ls -t --reverse | head -n -5 | xargs -I{} rm --force)
+fi
+# Unset any and all variables, functions and whatever else was used.
+unset TEXTFORMATTING UPDATES_AVAILABLE CONTINUEUPDATE RUNTIMESTAMP RUNDATE BACKUP_COMMAND_RESULT LOGSDIR SYSUPDLOGFILE UPGRADE_AUR_RESULT NEWMERGE_RESULT COPYOFFICIALCHOICE COPYAURCHOICE SYSTEMINFO MESSAGE  CONFIRMCONTINUECHOICE CONFIRMCONTINUECHOICE MIRRORSTATUS

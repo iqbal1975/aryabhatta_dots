@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+[[ -n $DEBUG ]] && set -x
+
+red='\033[0;31m'
+green='\033[0;32m'
+reset='\033[0m'
+
+VERSION=$1
+
+if [[ -z $1 ]]; then
+	echo -e "${red}Error: no version specified!${reset}"
+	echo -e "Usage: \`phpenv [VERSION]\`"
+	echo -e "Example: \`phpenv 81\`"
+fi
+
+PHP_BIN="/usr/bin/php$VERSION"
+PHPIZE_BIN="/usr/bin/phpize$VERSION"
+PHP_FPM_BIN="/usr/bin/php-fpm$VERSION"
+PHP_DBG_BIN="/usr/bin/phpdbg$VERSION"
+PHP_CGI_BIN="/usr/bin/php-cgi$VERSION"
+PHP_PEAR_BIN="/usr/bin/pear$VERSION"
+PHP_PECL_BIN="/usr/bin/pecl$VERSION"
+
+if [[ -f "$PHP_BIN" ]]; then
+	echo -e "${green}Activating PHP $VERSION..."
+	rm -f $HOME/.local/bin/php $HOME/.local/bin/phpize $HOME/.local/bin/php-fpm $HOME/.local/bin/phpdbg $HOME/.local/bin/php-cgi $HOME/.local/bin/pear $HOME/.local/bin/pecl
+	ln -s $PHP_BIN $HOME/.local/bin/php
+	ln -s $PHPIZE_BIN $HOME/.local/bin/phpize
+	ln -s $PHP_FPM_BIN $HOME/.local/bin/php-fpm
+	ln -s $PHP_DBG_BIN $HOME/.local/bin/phpdbg
+	ln -s $PHP_CGI_BIN $HOME/.local/bin/php-cgi
+	ln -s $PHP_PEAR_BIN $HOME/.local/bin/pear
+	ln -s $PHP_PECL_BIN $HOME/.local/bin/pecl
+	php -v
+else
+	echo -e "${red}Error: $PHP_BIN could not be found!${reset}"
+fi

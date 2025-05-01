@@ -1,0 +1,25 @@
+#!/bin/bash
+trap "exit" 0
+# DC="docker compose" # add  `-f docker/compose.yml` if it's in another folder
+DC="docker compose -f compose.yml"
+if [ $# -eq 0 ]; then
+  docker ps -a
+elif [ $1 == "up" ]; then
+  $DC up -d
+elif [ $1 == "nr" ]; then
+  if [ $# -gt 1 ]; then
+    $DC exec node su node -c "${*:2}"
+  else
+    $DC exec node su node
+  fi
+elif [ $1 == "npm" ]; then
+  $DC exec node su node -c "npm ${*:2}"
+elif [ $1 == "install" ]; then
+  $DC exec node su node -c 'npm install'
+elif [ $1 == "recreate" ]; then
+  $DC up -d --force-recreate ${*:2}
+elif [ $1 == "build" ]; then
+  $DC up -d --force-recreate --build ${*:2}
+else
+  $DC $*
+fi

@@ -1,0 +1,14 @@
+#!/bin/bash
+rustup update
+echo -e "\n"
+rustup default stable
+echo -e "\n"
+rustup self upgrade-data
+echo -e "\n"
+conda update --all --yes
+echo -e "\n"
+sudo pacman -Syyu
+echo -e "\n"
+yay -Syu
+# echo -e "\n"
+# paru -Syu

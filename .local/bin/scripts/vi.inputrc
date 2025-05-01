@@ -1,0 +1,26 @@
+# All my gist code is licensed under the terms of the MIT license.
+
+# Video demo: https://www.youtube.com/shorts/7IEfnUqjaSk
+
+# add the contents of this file to ~/.inputrc
+
+# this is where the magic happens
+set editing-mode vi
+
+# vi INSERT prompt
+set vi-ins-mode-string "\1\e[30;44m\2 INS \1\e[0m\2 "
+
+# vi NORMAL prompt
+set vi-cmd-mode-string "\1\e[30;47m\2 NOR \1\e[0m\2 "
+
+# bash is a nice place to mix and match vim and emacs, to find your personal style
+$if mode=vi
+    # bind substring history commands to j and k on vi's command mode
+    set keymap vi-command
+    "k": history-substring-search-backward
+    "j": history-substring-search-forward
+
+    # I can't live without C-l to clear the screen
+    set keymap vi-insert
+    "\C-l": clear-screen
+$endif
