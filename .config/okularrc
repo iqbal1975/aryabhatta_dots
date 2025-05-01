@@ -1,0 +1,31 @@
+[Desktop Entry]
+FullScreen=false
+
+[General]
+LockSidebar=true
+ShowSidebar=false
+
+[Recent Files]
+File1[$e]=/run/media/iqbal/DFC9-D85D/Documents/U.S. Visa fee Payment Confirmation INDK9B5V6H1 - XYZ13205695701.pdf
+File10[$e]=$HOME/Documents/Senvion/Iqbal Thaker - CV 2024.pdf
+File2[$e]=/run/media/iqbal/DFC9-D85D/Documents/Appointment Confirmation - Iqbal Thaker - US Visa.pdf
+File3[$e]=/run/media/iqbal/DFC9-D85D/Documents/India - Current Worker with Addresses 2025-04-18.pdf
+File4[$e]=/run/media/iqbal/DFC9-D85D/Documents/India Employment Letter 2025-04-18.pdf
+File5[$e]=/run/media/iqbal/DFC9-D85D/Documents/e-EPIC_TAU6247118.pdf
+File6[$e]=/run/media/iqbal/DFC9-D85D/Documents/EAadhaar_Normal_Iqbal-Thaker.pdf
+File7[$e]=/run/media/iqbal/DFC9-D85D/Documents/ACK_AEDPT7304M_2022-23_376171230310722.pdf
+File8[$e]=/run/media/iqbal/DFC9-D85D/Documents/ACK_AEDPT7304M_2024-25_285896650310724.pdf
+File9[$e]=/run/media/iqbal/DFC9-D85D/Documents/ACK_AEDPT7304M_2023-24_885064790300723.pdf
+Name1[$e]=U.S. Visa fee Payment Confirmation INDK9B5V6H1 - XYZ13205695701.pdf
+Name10[$e]=Iqbal Thaker - CV 2024.pdf
+Name2[$e]=Appointment Confirmation - Iqbal Thaker - US Visa.pdf
+Name3[$e]=India - Current Worker with Addresses 2025-04-18.pdf
+Name4[$e]=India Employment Letter 2025-04-18.pdf
+Name5[$e]=e-EPIC_TAU6247118.pdf
+Name6[$e]=EAadhaar_Normal_Iqbal-Thaker.pdf
+Name7[$e]=ACK_AEDPT7304M_2022-23_376171230310722.pdf
+Name8[$e]=ACK_AEDPT7304M_2024-25_285896650310724.pdf
+Name9[$e]=ACK_AEDPT7304M_2023-24_885064790300723.pdf
+
+[UiSettings]
+ColorScheme=Kvantum

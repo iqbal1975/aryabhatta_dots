@@ -1,0 +1,48 @@
+MenuBar=Disabled
+
+[CompactMode]
+PreviewSize=22
+
+[ContextMenu]
+ShowCopyMoveMenu=true
+
+[DetailsMode]
+PreviewSize=22
+
+[ExtractDialog]
+1920x1080 screen: Window-Maximized=true
+DirHistory[$e]=$HOME/Pictures/wallpapers/anime/,$HOME/Downloads/Inter_Fonts/
+
+[General]
+BrowseThroughArchives=true
+EditableUrl=true
+FilterBar=true
+OpenExternallyCalledFolderInNewTab=true
+ShowFullPath=true
+ShowFullPathInTitlebar=true
+ShowStatusBar=FullWidth
+SplitView=true
+UseTabForSwitchingSplitView=true
+Version=202
+ViewPropsTimestamp=2023,8,18,18,9,40.762
+
+[IconsMode]
+IconSize=22
+PreviewSize=22
+TextWidthIndex=0
+
+[InformationPanel]
+dateFormat=ShortFormat
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[MainWindow]
+MenuBar=Disabled
+
+[PreviewSettings]
+Plugins=appimagethumbnail,audiothumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,mltpreview,opendocumentthumbnail,svgthumbnail,textthumbnail
+
+[UiSettings]
+ColorScheme=Gruvbox-Material

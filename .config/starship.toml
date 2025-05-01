@@ -1,0 +1,705 @@
+# ███████╗████████╗ █████╗ ██████╗ ███████╗██╗  ██╗██╗██████╗
+# ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║██║██╔══██╗
+# ███████╗   ██║   ███████║██████╔╝███████╗███████║██║██████╔╝
+# ╚════██║   ██║   ██╔══██║██╔══██╗╚════██║██╔══██║██║██╔═══╝
+# ███████║   ██║   ██║  ██║██║  ██║███████║██║  ██║██║██║
+# ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝
+# The minimal, blazing-fast, and infinitely customizable prompt
+# https://starship.rs
+
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Don't print a new line at the start of the prompt
+# add_newline = false
+# Pipes ╰─ ╭─
+# Powerline symbols                                    
+# Wedges 🭧🭒 🭣🭧🭓
+# Random noise 🬖🬥🬔🬗
+
+# Sets which color palette from palettes to use
+palette = "catppuccin_mocha"
+# palette = "gruvbox_dark"
+
+# right_format = """\
+# $cmd_duration
+# """
+
+# format = """
+# $username$hostname$directory
+
+# $fill\
+format = """
+[](surface0)\
+$os\
+$username\
+[](fg:surface0 bg:pink)\
+$directory\
+${custom.folder_number}\
+${custom.file_number}\
+[](fg:pink bg:blue)\
+${custom.giturl}\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+[](fg:blue bg:mauve)\
+${custom.time_mood}\
+$time\
+[](fg:mauve bg:blue)\
+${custom.ssh_no_keys}\
+${custom.ssh_keys}\
+${custom.gnu_screen}\
+[](fg:blue bg:yellow)\
+$cmd_duration\
+$memory_usage\
+$aws\
+$kubernetes\
+[](fg:yellow bg:teal)\
+$c\
+${custom.c}\
+${custom.cpp}\
+${custom.docker}\
+$conda\
+$dart\
+$elixir\
+$elm\
+$golang\
+$haskell\
+$java\
+$julia\
+$kotlin\
+$lua\
+$nodejs\
+$nim\
+$perl\
+$php\
+$python\
+$rlang\
+$ruby\
+$rust\
+$scala\
+$swift\
+[](fg:teal bg:green)\
+$battery\
+[](fg:green)\
+$line_break\
+${custom.bash}\
+${custom.fish}\
+${custom.zsh}\
+$character
+"""
+
+continuation_prompt = "[  ](blue)"
+
+[custom.bash]
+command = "echo  "
+when = """ test "$STARSHIP_SHELL" "==" "bash" """
+format = '$output'
+
+[custom.fish]
+# command = "echo 🐟 "
+command = "echo 🐟 "
+when = """ test "$STARSHIP_SHELL" "==" "fish" """
+format = '$output'
+
+[custom.zsh]
+command = "echo 🚀"
+when = """ test "$STARSHIP_SHELL" "==" "zsh" """
+format = '$output'
+
+[character]
+disabled = false
+success_symbol = '[   ](bold fg:green)'
+error_symbol = '[   ](bold fg:red)'
+vimcmd_symbol = '[   ](bold fg:green)'
+vimcmd_replace_one_symbol = '[   ](bold fg:purple)'
+vimcmd_replace_symbol = '[   ](bold fg:purple)'
+vimcmd_visual_symbol = '[   ](bold fg:lavender)'
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = false
+symbol = "󰏗 "
+
+[os]
+disabled = false
+style = "bg:surface0 fg:text"
+
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+AlmaLinux = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CachyOS = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+Nobara = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+RockyLinux = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Void = " "
+Windows = "󰍲 "
+
+[username]
+show_always = true
+style_user = "bg:surface0 fg:text"
+style_root = "bg:surface0 fg:text"
+format = '[ $user ]($style)'
+
+[hostname]
+ssh_symbol = " "
+ssh_only = false
+format =  '[ ](bold bg:yellow fg:blue)[$hostname](bg:yellow bold fg:#000000)[ ](bold fg:yellow bg:green)'
+trim_at = ".companyname.com"
+disabled = true
+
+[custom.ssh_no_keys]
+# disabled = true
+description = "SSH missing keys"
+when = "ssh-add -l | grep -q 'no identities'"
+command = "echo 🚫"
+format = '[ $symbol$output ]($style)'
+shell = ["zsh", "-f"]
+symbol = "🔑"
+# style = "bold fg:red bg:peach"
+style = "bold fg:red bg:blue"
+
+[custom.ssh_keys]
+# disabled = true
+description = "SSH key count"
+when = "ssh-add -l | grep -v -q 'no identities'"
+command = "ssh-add -l | grep -v 'no identities' | wc -l"
+format = '[ $symbol$output ]($style)'
+shell = ["zsh", "-f"]
+symbol = "🔑"
+style = "bold fg:mantle bg:blue"
+# style = "bold fg:green bg:peach"
+
+[directory]
+home_symbol = "~"
+read_only = "  "
+style = "fg:mantle bg:pink"
+format = "[ $path]($style)"
+truncation_length = 3
+truncation_symbol = " …/"
+
+[directory.substitutions]
+"~" = " ~"
+"Documents" = "  Documents"
+"Downloads" = "   Downloads"
+"Music" = "   Music"
+"Pictures" = "   Pictures"
+"Projects" = "   Projects"
+"Developer" = "󰲋 Developer"
+
+[custom.file_number]
+command = "find . -maxdepth 1 -type f -not -name '.DS_Store' | wc -l"
+when = "exit 0" # run always
+shell = ["zsh", "-f"]
+symbol = "  "
+description = "Number of files in the current working directory"
+format = '[$symbol$output ]($style)'
+style = "fg:mantle bg:pink"
+
+[custom.folder_number]
+command = "find . -maxdepth 1 -type d -not -name '.git' -not -name '.' | wc -l"
+when = "exit 0"
+shell = ["zsh", "-f"]
+symbol = "  "
+description = "Number of folders in the current working directory"
+format = '[$symbol$output]($style)'
+style = "fg:mantle bg:pink"
+
+[custom.giturl]
+disabled = false
+description = "Display symbol for remote Git server"
+command = """
+GIT_REMOTE=$(command git ls-remote --get-url 2> /dev/null)
+if [[ "$GIT_REMOTE" =~ "github" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+elif [[ "$GIT_REMOTE" =~ "gitlab" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+elif [[ "$GIT_REMOTE" =~ "bitbucket" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+elif [[ "$GIT_REMOTE" =~ "git" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+else
+    GIT_REMOTE_SYMBOL=" "
+fi
+echo "$GIT_REMOTE_SYMBOL "
+"""
+when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
+shell = ["zsh", "-f"]
+style = "fg:mantle bg:blue"
+format = '[ at $output]($style)'
+
+[git_branch]
+symbol = "  "
+style = "fg:mantle bg:blue"
+format = '[[ $symbol $branch ](fg:mantle bg:blue)]($style)'
+
+[git_commit]
+commit_hash_length = 4
+tag_symbol = "🔖 "
+
+[git_state]
+style = "fg:mantle bg:blue"
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = "[🍒 PICKING](bold red)"
+
+[git_status]
+ahead = " $count "
+behind = " $count "
+conflicted = "🏳 $count"
+deleted = "﫧 $count "
+diverged = " $count "
+stashed = " $count "
+modified = " $count "
+staged = " $count "
+renamed = "✍️ $count "
+untracked = " $count "
+style = "fg:mantle bg:blue"
+format = '[[($all_status$ahead_behind )](fg:mantle bg:blue)]($style)'
+
+[line_break]
+disabled = false
+
+[custom.time_mood]
+disabled = false
+command = """
+TIME=$(date +%H)
+if [[ "$TIME" -le 17 && "$TIME" -ge 8 ]];then
+    time_symbol="🌤"
+elif [[ "$TIME" -le 21 && "$TIME" -ge 18 ]];then
+    time_symbol="🌖"
+elif [[ "$TIME" -le 4 || "$TIME" -ge 22 ]];then
+    time_symbol="🌙"
+else
+    time_symbol="🌔"
+fi
+echo "$time_symbol "
+"""
+shell = ["zsh", "-f"]
+style = "fg:mantle bg:mauve"
+format = '[ $output (fg:mantle bg:mauve)]($style)'
+when = "true"
+
+[time]
+disabled = false
+# time_format = "%a, %I:%M %p" # Hour:Minute Format
+time_format = "%a, %H:%M" # Hour:Minute Format
+style = "fg:mantle bg:mauve"
+format = '[[ $time ](fg:mantle bg:mauve)]($style)'
+
+[battery]
+full_symbol = "🔋"
+charging_symbol = "⚡️"
+discharging_symbol = "💀"
+
+[[battery.display]]  # "bold red" style when capacity is between 0% and 15%
+threshold = 15
+style = "bold red"
+
+[[battery.display]]  # "bold yellow" style when capacity is between 15% and 30%
+threshold = 30
+style = "bold yellow"
+
+[cmd_duration]
+min_time = 0
+# format = '[🬈🬖🬥🬅 ](bold bg:cyan fg:#000000)[time:$duration](bold bg:cyan fg:#000000)[ 🬖🬥🬔🬗](bold bg:cyan fg:#000000)'
+# style = "yellow bold"
+style = "fg:mantle bg:yellow"
+format = '[  $duration ]($style)'
+
+[memory_usage]
+disabled = false
+threshold = 75
+symbol = "󰍛 "
+# style = 'yellow bold'
+style = "fg:mantle bg:yellow"
+format = '[ $symbol $ram]($style)'
+
+# Add gnu screen session name
+[custom.gnu_screen]
+command = "echo ${STY#[0-9]*.}" # shows output of command
+description = "Display a monitor glyph and the session name if we're in a gnu screen session."
+style = "fg:mantle bg:peach"
+format = '[$symbol $output]($style) '
+shell = ["zsh", "-f"]
+symbol = "🖵 "
+when = """ test "$STY" """
+
+[aws]
+format = 'on [$symbol($profile )(\($region\) )]($style)'
+style = 'bold blue'
+symbol = "  "
+
+[azure]
+symbol = "󰠅 "
+disabled=true
+
+[buf]
+symbol = " "
+disabled=true
+
+[docker_context]
+symbol = " "
+style = "bg:mantle"
+format = '[[ $symbol( $context) ](fg:mantle bg:teal)]($style)'
+# style = "fg:#06969A bold"
+
+[custom.docker]
+description = "Shows the docker symbol if the current directory has Dockerfile or docker-compose.yml files"
+symbol = " "
+files = ["Dockerfile", "docker-compose.yml", "docker-compose.yaml", "compose.yml", "compose.yaml"]
+format = '[[ $symbol( $context) ](fg:base bg:teal)]($style)'
+when = """ command -v docker &> /dev/null; exit (echo $?); """
+shell = ["zsh", "-f"]
+# command = "echo 🐳"
+
+[c]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#3F4347 bold"
+
+[custom.c]
+command = "gcc -dumpversion"
+symbol = ""
+extensions = ["c"]
+shell = ["zsh", "-f"]
+style = "bg:teal"
+format = 'via [[$symbol v$output](fg:base bg:teal)]($style)'
+# style = "bold blue"
+
+[custom.cpp]
+command = "gcc -dumpversion"
+symbol = ""
+extensions = ["cpp"]
+shell = ["zsh", "-f"]
+style = "bold yellow"
+format = 'via [[$symbol v$output](fg:base bg:teal)]($style)'
+
+[cmake]
+symbol = " "
+disabled=true
+
+[cobol]
+disabled=true
+
+[conda]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#0402A9 bold"
+
+[container]
+disabled=true
+
+[crystal]
+symbol = " "
+disabled=true
+
+[daml]
+disabled=true
+
+[dart]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#3FBEF7 bold"
+
+[deno]
+disabled=true
+
+[dotnet]
+disabled=true
+
+[elixir]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#422758 bold"
+
+[elm]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#F0AD00 bold"
+
+[erlang]
+disabled=true
+
+[fennel]
+symbol = " "
+disabled=true
+
+[fossil_branch]
+symbol = " "
+disabled=true
+
+[gcloud]
+disabled=true
+
+[golang]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#00ACD7 bold"
+
+[gradle]
+symbol = " "
+disabled=true
+
+[guix_shell]
+symbol = " "
+disabled=true
+
+[haskell]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#9C4B89 bold"
+
+[haxe]
+symbol = " "
+disabled=true
+
+[helm]
+disabled=true
+
+[hg_branch]
+symbol = " "
+disabled=true
+
+[java]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#F0931C bold"
+
+[julia]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#CA3C32 bold"
+
+[kotlin]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#746DDA bold"
+
+[kubernetes]
+symbol = '☸'
+style = "fg:#0402A9 bold"
+detect_files = ['k8s', 'Dockerfile']
+detect_extensions = ['yaml']
+format = '[$symbol$context( \($namespace\))]($style)'
+
+[lua]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#0402A9 bold"
+
+[meson]
+symbol = "󰔷 "
+
+[nim]
+symbol = "󰆥 "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#F7E852 bold"
+
+[nix_shell]
+symbol = " "
+disabled=true
+
+[nodejs]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#6BA15C bold"
+
+[ocaml]
+symbol = " "
+disabled=true
+
+[openstack]
+disabled=true
+
+[perl]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#0402A9 bold"
+
+[php]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#6BA15C bold"
+
+[pijul_channel]
+symbol = " "
+disabled=true
+
+[pulumi]
+disabled=true
+
+[purescript]
+disabled=true
+
+[python]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#316A9A bold"
+
+[raku]
+disabled=true
+
+[red]
+disabled=true
+
+[rlang]
+symbol = "󰟔 "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#2266B8 bold"
+
+[ruby]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#B91B0B bold"
+
+[rust]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#C26F2E bold"
+
+[scala]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#D73222 bold"
+
+[shell]
+disabled=true
+
+[shlvl]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#6BA15C bold"
+
+[singularity]
+disabled=true
+
+[spack]
+disabled=true
+
+[status]
+disabled=true
+
+[swift]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+# style = "fg:#746DDA bold"
+# format = '[ $symbol ($version) ]($style)'
+
+[terraform]
+disabled=true
+
+[vagrant]
+disabled=true
+
+[vcsh]
+disabled=true
+
+[vlang]
+disabled=true
+
+[zig]
+symbol = " "
+disabled=true
+
+# Timeout for commands executed by starship (in milliseconds)
+command_timeout = 1000
+
+# Define custom colors
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"
+
+[palettes.gruvbox_dark]
+color_fg0 = '#fbf1c7'
+color_bg1 = '#3c3836'
+color_bg3 = '#665c54'
+color_blue = '#458588'
+color_aqua = '#689d6a'
+color_green = '#98971a'
+color_orange = '#d65d0e'
+color_purple = '#b16286'
+color_red = '#cc241d'
+color_yellow = '#d79921'
