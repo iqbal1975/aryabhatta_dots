@@ -8,7 +8,7 @@ Heartfelt thanks to [@adi1090x](https://github.com/adi1090x) for [@archcraft-hyp
 
 Use as you wish.
 
-## What I am using
+## What am I using ?
 
 <details>
   <summary>CLICK TO EXPAND</summary>
