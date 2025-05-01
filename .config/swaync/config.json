@@ -1,0 +1,198 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "positionX": "right",
+  "positionY": "top",
+  "layer": "overlay",
+  "layer-shell": true,
+  "cssPriority": "application",
+  "control-center-layer": "top",
+  "control-center-width": 500,
+  "control-center-height": 1000,
+  "control-center-margin-top": 5,
+  "control-center-margin-bottom": 5,
+  "control-center-margin-right": 5,
+  "control-center-margin-left": 0,
+  "notification-2fa-action": true,
+  "notification-inline-replies": false,
+  "notification-window-width": 500,
+  "notification-icon-size": 32,
+  "notification-body-image-height": 100,
+  "notification-body-image-width": 200,
+  "relative-timestamps": true,
+  "timeout": 10,
+  "timeout-low": 5,
+  "timeout-critical": 0,
+  "fit-to-screen": false,
+  "keyboard-shortcuts": true,
+  "image-visibility": "when-available",
+  "transition-time": 200,
+  "hide-on-clear": true,
+  "hide-on-action": true,
+  "script-fail-notify": true,
+  "scripts": {
+    "example-script": {
+      "exec": "echo 'Do something...'",
+      "urgency": "Normal"
+    },
+    "example-action-script": {
+      "exec": "echo 'Do something actionable!'",
+      "urgency": "Normal",
+      "run-on": "action"
+    }
+  },
+  "notification-visibility": {
+    "example-name": {
+      "state": "muted",
+      "urgency": "Low",
+      "app-name": "Spotify"
+    }
+  },
+  "widgets": [
+    "menubar",
+    "backlight",
+    "title",
+    "dnd",
+    "notifications",
+    "mpris",
+    "volume",
+    "buttons-grid"
+  ],
+  "widget-config": {
+    "inhibitors": {
+      "text": "Inhibitors",
+      "button-text": "Clear All",
+      "clear-all-button": true
+    },
+    "title": {
+      "text": "Notifications",
+      "button-text": "Clear All",
+      "clear-all-button": true
+    },
+    "dnd": {
+      "text": "Do Not Disturb"
+    },
+    "label": {
+      "max-lines": 1,
+      "text": "Control Center"
+    },
+    "mpris": {
+      "image-size": 50,
+      "image-radius": 10
+    },
+    "volume": {
+      "label": "󰕾 ",
+      "show-per-app": true,
+      "show-per-app-icon": true,
+      "show-per-app-label": true
+    },
+    "backlight": {
+      "label": "󰃟 ",
+      "device": "intel_backlight",
+      "min": 25
+    },
+    "menubar": {
+      "menu#power-buttons": {
+        "label": "   Power Center     ",
+        "position": "left",
+        "actions": [
+          {
+            "label": "󰌾 Lock Screen",
+            "type": "toggle",
+            "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && hyprlock'"
+          },
+          {
+            "label": "󰍃 Logout",
+            "type": "toggle",
+            "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && kill_hyprland.sh'"
+          },
+          {
+            "label": "󰤄 Suspend",
+            "type": "toggle",
+            "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && systemctl suspend'"
+          },
+          {
+            "label": "󰜉 Reboot",
+            "type": "toggle",
+            "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && systemctl reboot'"
+          },
+          {
+            "label": "󰐥 Shutdown",
+            "type": "toggle",
+            "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && systemctl poweroff'"
+          }
+        ]
+      },
+      "menu#powermode-buttons": {
+        "label": "    Power Modes     ",
+        "position": "right",
+        "actions": [
+          {
+            "label": "Performance",
+            "command": "sudo cpupower frequency-set -g performance"
+          },
+          {
+            "label": "Balanced (Default)",
+            "command": "sudo cpupower frequency-set -g schedutil"
+          },
+          {
+            "label": "Power-saver",
+            "command": "sudo cpupower frequency-set -g powersave"
+          }
+        ]
+      }
+    },
+    "buttons-grid": {
+      "actions": [
+        {
+          "label": "    󰌾    ",
+          "type": "toggle",
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && hyprlock'"
+        },
+        {
+          "label": "    󰍃    ",
+          "type": "toggle",
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && kill_hyprland.sh'"
+        },
+        {
+          "label": "    󰤄    ",
+          "type": "toggle",
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && systemctl suspend'"
+        },
+        {
+          "label": "    󰜉    ",
+          "type": "toggle",
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && systemctl reboot'"
+        },
+        {
+          "label": "    󰐥    ",
+          "type": "toggle",
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && systemctl poweroff'"
+        },
+        {
+          "label": "        ",
+          "type": "toggle",
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && swaync-client -cp && $HOME/.config/hypr/scripts/rofi_launcher'"
+        },
+        {
+          "label": "    󰕾    ",
+          "command": "swaync-widgets sound"
+        },
+        {
+          "label": "        ",
+          "command": "swaync-widgets mic"
+        },
+        {
+          "label": "        ",
+          "type": "toggle",
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'",
+          "update-command": "sh -c '[[ $(nmcli radio wifi) == \"enabled\" ]] && echo true || echo false'"
+        },
+        {
+          "label": "        ",
+          "type": "toggle",
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && swaync-client -cp && $HOME/.config/hypr/scripts/wf-record-start.sh'"
+        }
+      ]
+    }
+  }
+}

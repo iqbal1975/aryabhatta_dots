@@ -1,0 +1,74 @@
+# An example configuration for vdirsyncer.
+#
+# Move it to ~/.vdirsyncer/config or ~/.config/vdirsyncer/config and edit it.
+# Run `vdirsyncer --help` for CLI usage.
+#
+# Optional parameters are commented out.
+# This file doesn't document all available parameters, see
+# http://vdirsyncer.pimutils.org/ for the rest of them.
+
+[general]
+# A folder where vdirsyncer can store some metadata about each pair.
+status_path = "~/.config/vdirsyncer/status/"
+
+# CARDDAV
+# [pair bob_contacts]
+# A `[pair <name>]` block defines two storages `a` and `b` that should be
+# synchronized. The definition of these storages follows in `[storage <name>]`
+# blocks. This is similar to accounts in OfflineIMAP.
+# a = "bob_contacts_local"
+# b = "bob_contacts_remote"
+
+# Synchronize all collections that can be found.
+# You need to run `vdirsyncer discover` if new calendars/addressbooks are added
+# on the server.
+
+# collections = ["from a", "from b"]
+
+# Synchronize the "display name" property into a local file (~/.contacts/displayname).
+# metadata = ["Iqbal Thaker"]
+
+# To resolve a conflict the following values are possible:
+#   `null` - abort when collisions occur (default)
+#   `"a wins"` - assume a's items to be more up-to-date
+#   `"b wins"` - assume b's items to be more up-to-date
+#conflict_resolution = null
+
+# [storage bob_contacts_local]
+# A storage references actual data on a remote server or on the local disk.
+# Similar to repositories in OfflineIMAP.
+# type = "filesystem"
+# path = "~/.contacts/"
+# fileext = ".vcf"
+
+# [storage bob_contacts_remote]
+# type = "carddav"
+# url = "https://owncloud.example.com/remote.php/carddav/"
+#username =
+# The password can also be fetched from the system password storage, netrc or a
+# custom command. See http://vdirsyncer.pimutils.org/en/stable/keyring.html
+#password =
+
+# CALDAV
+[pair calendar]
+a = "server"
+b = "private"
+collections = ["from a", "from b"]
+conflict_resolution = "a wins"
+metadata = ["color"]
+
+[storage server]
+type = "google_calendar"
+start_date = "datetime.now() - timedelta(days=365)"
+end_date = "datetime.now() + timedelta(days=365)"
+token_file = "~/.config/vdirsyncer/token_file"
+client_id = "950815281137-c1s47btc3hmp4jmp2n95omt7v6i7hct9.apps.googleusercontent.com"
+client_secret = "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"
+
+[storage private]
+type = "filesystem"
+path = "~/.local/share/khal/calendars/private"
+fileext = ".ics"
+encoding = "utf-8"
+post_hook = null
+fileignoreext = ".tmp"

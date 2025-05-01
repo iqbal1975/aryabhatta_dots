@@ -1,0 +1,11 @@
+@define-color pink #98971a; @define-color crust #ebdbb2; @define-color surface0 #313244; @define-color text #ebdbb2;
+/* widget sound */
+.widget-buttons-grid>flowbox>flowboxchild:nth-child(7)>button{background: @transparent; border: 2px solid @surface0}
+.widget-buttons-grid>flowbox>flowboxchild:nth-child(7)>button:hover{background: @transparent; border: 2px solid @pink}
+.widget-buttons-grid>flowbox>flowboxchild:nth-child(7)>button>label{color: @text;}
+.widget-buttons-grid>flowbox>flowboxchild:nth-child(7)>button:hover>label{color: @pink;}
+/* widget mic */
+.widget-buttons-grid>flowbox>flowboxchild:nth-child(8)>button{background: @pink; border: 2px solid @pink}
+.widget-buttons-grid>flowbox>flowboxchild:nth-child(8)>button:hover{background: @pink; border: 2px solid @pink}
+.widget-buttons-grid>flowbox>flowboxchild:nth-child(8)>button>label{color: @crust;}
+.widget-buttons-grid>flowbox>flowboxchild:nth-child(8)>button:hover>label{color: @crust;}
