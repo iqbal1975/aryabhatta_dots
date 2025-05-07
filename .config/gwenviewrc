@@ -5,26 +5,26 @@ LastUsedVersion=210800
 MenuBar=Disabled
 
 [Recent Files]
-File1[$e]=$HOME/Pictures/wallpapers/anime/Img-19.png
-File10[$e]=$HOME/Documents/Personal/Voter-ID-Scan.jpg
-File2[$e]=$HOME/Pictures/wallpapers/anime/Img-20.png
-File3[$e]=$HOME/Pictures/wallpapers/anime/Img-21.png
-File4[$e]=$HOME/Documents/Personal/PAN-Card_DigiLocker.jpg
-File5[$e]=$HOME/Documents/Personal/Aadhaar/Aadhaar Card - Iqbal Thaker.png
-File6[$e]=$HOME/Documents/Personal/Aadhaar/Aadhaar Card - Parveen Gandhi.png
-File7[$e]=$HOME/Documents/Personal/Aadhaar/Aadhaar-Card-Scan.jpg
-File8[$e]=$HOME/Documents/Personal/PAN Card - Iqbal.jpg
-File9[$e]=$HOME/Documents/Personal/Passport Photo - Iqbal.jpg
-Name1[$e]=Img-19.png
-Name10[$e]=Voter-ID-Scan.jpg
-Name2[$e]=Img-20.png
-Name3[$e]=Img-21.png
-Name4[$e]=PAN-Card_DigiLocker.jpg
-Name5[$e]=Aadhaar Card - Iqbal Thaker.png
-Name6[$e]=Aadhaar Card - Parveen Gandhi.png
-Name7[$e]=Aadhaar-Card-Scan.jpg
-Name8[$e]=PAN Card - Iqbal.jpg
-Name9[$e]=Passport Photo - Iqbal.jpg
+File1[$e]=$HOME/Pictures/wallpapers/anime/Img-20.png
+File10[$e]=$HOME/Documents/Personal/Aadhaar/Aadhaar-Scan_Iqbal-Thaker.jpg
+File2[$e]=$HOME/Pictures/wallpapers/anime/Img-21.png
+File3[$e]=$HOME/Documents/Personal/PAN-Card_DigiLocker.jpg
+File4[$e]=$HOME/Documents/Personal/Aadhaar/Aadhaar Card - Iqbal Thaker.png
+File5[$e]=$HOME/Documents/Personal/Aadhaar/Aadhaar Card - Parveen Gandhi.png
+File6[$e]=$HOME/Documents/Personal/Aadhaar/Aadhaar-Card-Scan.jpg
+File7[$e]=$HOME/Documents/Personal/PAN Card - Iqbal.jpg
+File8[$e]=$HOME/Documents/Personal/Passport Photo - Iqbal.jpg
+File9[$e]=$HOME/Documents/Personal/Voter-ID-Scan.jpg
+Name1[$e]=Img-20.png
+Name10[$e]=Aadhaar-Scan_Iqbal-Thaker.jpg
+Name2[$e]=Img-21.png
+Name3[$e]=PAN-Card_DigiLocker.jpg
+Name4[$e]=Aadhaar Card - Iqbal Thaker.png
+Name5[$e]=Aadhaar Card - Parveen Gandhi.png
+Name6[$e]=Aadhaar-Card-Scan.jpg
+Name7[$e]=PAN Card - Iqbal.jpg
+Name8[$e]=Passport Photo - Iqbal.jpg
+Name9[$e]=Voter-ID-Scan.jpg
 
 [SideBar]
 InformationSplitterSizes=226,243

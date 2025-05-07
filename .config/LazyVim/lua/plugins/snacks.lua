@@ -55,6 +55,7 @@ return {
           title = "Git Status (LazyVim)",
           section = "terminal",
           cmd = "git --no-pager diff --stat -B -M -C",
+          -- cmd = "git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME --no-pager diff --stat -B -M -C",
           height = 5,
           padding = 1,
           ttl = 5 * 60,

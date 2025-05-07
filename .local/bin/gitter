@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-# DIR=$(pwd)
-# cd "$DIR"
 read -p "Git commit message: " COMMIT
-# config add .
-config commit -a . -m "$COMMIT"
-config push
+git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME add .
+git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME commit -a . -m "$COMMIT"
+git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME push
 read -p "Done! Press any key to exit"

@@ -18,7 +18,7 @@ $
 
 # Command Line History (newest to oldest):
 :qa
-|2,0,1745833567,,"qa"
+|2,0,1746258644,,"qa"
 :q
 |2,0,1744287863,,"q"
 :wq
@@ -143,28 +143,32 @@ $
 |3,0,36,0,1,0,1740732705,"x"
 
 # File marks:
-'0  1  0  /tmp/crontab.eL42LL
-|4,48,1,0,1745833567,"/tmp/crontab.eL42LL"
-'1  4  0  ~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606
-|4,49,4,0,1744017709,"~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606"
-'2  4  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
-|4,50,4,0,1744017692,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
-'3  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
-|4,51,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
+'0  1  0  ~/mdadm.conf
+|4,48,1,0,1746258644,"~/mdadm.conf"
+'1  1  0  /tmp/crontab.eL42LL
+|4,49,1,0,1745833567,"/tmp/crontab.eL42LL"
+'2  4  0  ~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606
+|4,50,4,0,1744017709,"~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606"
+'3  4  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
+|4,51,4,0,1744017692,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
 '4  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
-|4,52,63,4,1743752696,"~/.config/LazyVim/lua/plugins/avante.lua"
-'5  1  0  ~/lua/plugins/avante.lua
-|4,53,1,0,1743752671,"~/lua/plugins/avante.lua"
-'6  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
-|4,54,63,4,1743246999,"~/.config/LazyVim/lua/plugins/avante.lua"
+|4,52,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
+'5  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,53,63,4,1743752696,"~/.config/LazyVim/lua/plugins/avante.lua"
+'6  1  0  ~/lua/plugins/avante.lua
+|4,54,1,0,1743752671,"~/lua/plugins/avante.lua"
 '7  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
 |4,55,63,4,1743246999,"~/.config/LazyVim/lua/plugins/avante.lua"
 '8  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
-|4,56,63,4,1743246972,"~/.config/LazyVim/lua/plugins/avante.lua"
+|4,56,63,4,1743246999,"~/.config/LazyVim/lua/plugins/avante.lua"
 '9  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
 |4,57,63,4,1743246972,"~/.config/LazyVim/lua/plugins/avante.lua"
 
 # Jumplist (newest first):
+-'  1  0  ~/mdadm.conf
+|4,39,1,0,1746258644,"~/mdadm.conf"
+-'  1  0  /tmp/crontab.eL42LL
+|4,39,1,0,1745833567,"/tmp/crontab.eL42LL"
 -'  1  0  /tmp/crontab.eL42LL
 |4,39,1,0,1745833567,"/tmp/crontab.eL42LL"
 -'  4  0  ~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606
@@ -175,6 +179,22 @@ $
 |4,39,4,0,1744017709,"~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606"
 -'  4  0  ~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606
 |4,39,4,0,1744017709,"~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606"
+-'  4  0  ~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606
+|4,39,4,0,1744017709,"~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606"
+-'  4  0  ~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606
+|4,39,4,0,1744017709,"~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606"
+-'  4  0  ~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606
+|4,39,4,0,1744017709,"~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606"
+-'  4  0  ~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606
+|4,39,4,0,1744017709,"~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606"
+-'  1  0  ~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606
+|4,39,1,0,1744017701,"~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606"
+-'  1  0  ~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606
+|4,39,1,0,1744017701,"~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606"
+-'  1  0  ~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606
+|4,39,1,0,1744017701,"~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606"
+-'  1  0  ~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606
+|4,39,1,0,1744017701,"~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606"
 -'  1  0  ~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606
 |4,39,1,0,1744017701,"~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606"
 -'  1  0  ~/.config/systemd/user/xdg-desktop-portal-hyprland.service.d/.#override.confb3e69141531d3606
@@ -199,6 +219,38 @@ $
 |4,39,4,0,1744017692,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
 -'  4  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
 |4,39,4,0,1744017692,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
+-'  4  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
+|4,39,4,0,1744017692,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
+-'  4  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
+|4,39,4,0,1744017692,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
+-'  4  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
+|4,39,4,0,1744017692,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
+-'  4  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
+|4,39,4,0,1744017692,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
+-'  4  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
+|4,39,4,0,1744017692,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
+-'  4  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
+|4,39,4,0,1744017692,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
+-'  4  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
+|4,39,4,0,1744017692,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
+-'  4  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
+|4,39,4,0,1744017692,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
+-'  1  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
+|4,39,1,0,1744017678,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
+-'  1  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
+|4,39,1,0,1744017678,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
+-'  1  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
+|4,39,1,0,1744017678,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
+-'  1  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
+|4,39,1,0,1744017678,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
+-'  1  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
+|4,39,1,0,1744017678,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
+-'  1  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
+|4,39,1,0,1744017678,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
+-'  1  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
+|4,39,1,0,1744017678,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
+-'  1  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
+|4,39,1,0,1744017678,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
 -'  1  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
 |4,39,1,0,1744017678,"~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0"
 -'  1  0  ~/.config/systemd/user/xdg-desktop-portal.service.d/.#override.conf38f4a5c2035256c0
@@ -248,7 +300,37 @@ $
 -'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
 |4,39,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
 -'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
-|4,39,63,4,1743752696,"~/.config/LazyVim/lua/plugins/avante.lua"
+|4,39,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
+-'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,39,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
+-'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,39,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
+-'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,39,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
+-'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,39,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
+-'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,39,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
+-'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,39,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
+-'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,39,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
+-'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,39,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
+-'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,39,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
+-'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,39,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
+-'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,39,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
+-'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,39,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
+-'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,39,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
+-'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,39,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
+-'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,39,63,4,1743752725,"~/.config/LazyVim/lua/plugins/avante.lua"
 -'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
 |4,39,63,4,1743752696,"~/.config/LazyVim/lua/plugins/avante.lua"
 -'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
@@ -279,94 +361,16 @@ $
 |4,39,63,4,1743752696,"~/.config/LazyVim/lua/plugins/avante.lua"
 -'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
 |4,39,63,4,1743752696,"~/.config/LazyVim/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
--'  1  0  ~/lua/plugins/avante.lua
-|4,39,1,0,1743752671,"~/lua/plugins/avante.lua"
+-'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,39,63,4,1743752696,"~/.config/LazyVim/lua/plugins/avante.lua"
+-'  63  4  ~/.config/LazyVim/lua/plugins/avante.lua
+|4,39,63,4,1743752696,"~/.config/LazyVim/lua/plugins/avante.lua"
 
 # History of marks within files (newest to oldest):
+
+> ~/mdadm.conf
+	*	1746258642	0
+	"	1	0
 
 > /tmp/crontab.eL42LL
 	*	1745833566	0
@@ -454,10 +458,6 @@ $
 
 > ~/NVIDIA_Notes.txt
 	*	1739703857	0
-	"	1	0
-
-> ~/mdadm.conf
-	*	1739703849	0
 	"	1	0
 
 > ~/Git_Master-to-Main.txt
