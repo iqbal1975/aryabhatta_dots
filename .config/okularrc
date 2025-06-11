@@ -6,26 +6,26 @@ LockSidebar=true
 ShowSidebar=false
 
 [Recent Files]
-File1[$e]=$HOME/Documents/Senvion/Iqbal Thaker - CV 2024.pdf
-File10[$e]=$HOME/Documents/BMW-X1-2017-Owners-Manual.pdf
-File2[$e]=$HOME/Downloads/Pharthav_CV.pdf
-File3[$e]=$HOME/Documents/Personal/Aadhaar/EAadhaar_Normal_Iqbal-Thaker.pdf
-File4[$e]=$HOME/Downloads/Mytan Farms Flyer.pdf
-File5[$e]=$HOME/Downloads/2064 Sobha Chrys - Tax Paid 2025-26.pdf
-File6[$e]=$HOME/Documents/BMW X1 [2016-2020] - Brochure.pdf
-File7[$e]=$HOME/Downloads/Turbo Car Care - Estimate for sunfilm.pdf
-File8[$e]=$HOME/Downloads/Turbo Car Care - Estimate for Graphene.pdf
-File9[$e]=$HOME/Downloads/Turbo Car Care - Ceramic & Graphene Coating.pdf
-Name1[$e]=Iqbal Thaker - CV 2024.pdf
-Name10[$e]=BMW-X1-2017-Owners-Manual.pdf
-Name2[$e]=Pharthav_CV.pdf
-Name3[$e]=EAadhaar_Normal_Iqbal-Thaker.pdf
-Name4[$e]=Mytan Farms Flyer.pdf
-Name5[$e]=2064 Sobha Chrys - Tax Paid 2025-26.pdf
-Name6[$e]=BMW X1 [2016-2020] - Brochure.pdf
-Name7[$e]=Turbo Car Care - Estimate for sunfilm.pdf
-Name8[$e]=Turbo Car Care - Estimate for Graphene.pdf
-Name9[$e]=Turbo Car Care - Ceramic & Graphene Coating.pdf
+File1[$e]=$HOME/Downloads/Mytan Farms Flyer.pdf
+File10[$e]=$HOME/Downloads/.zapzap_temp/Mytan Farms Flyer.pdf
+File2[$e]=$HOME/Downloads/2064 Sobha Chrys - Tax Paid 2025-26.pdf
+File3[$e]=$HOME/Documents/BMW X1 [2016-2020] - Brochure.pdf
+File4[$e]=$HOME/Downloads/Turbo Car Care - Estimate for sunfilm.pdf
+File5[$e]=$HOME/Downloads/Turbo Car Care - Estimate for Graphene.pdf
+File6[$e]=$HOME/Downloads/Turbo Car Care - Ceramic & Graphene Coating.pdf
+File7[$e]=$HOME/Documents/BMW-X1-2017-Owners-Manual.pdf
+File8[$e]=$HOME/Documents/Spinny Max Owner Handbook.pdf
+File9[$e]=$HOME/Documents/Personal/BMW X1/BMW ICICI LOMBARD Policy_3001_392802533_00_000.pdf
+Name1[$e]=Mytan Farms Flyer.pdf
+Name10[$e]=Mytan Farms Flyer.pdf
+Name2[$e]=2064 Sobha Chrys - Tax Paid 2025-26.pdf
+Name3[$e]=BMW X1 [2016-2020] - Brochure.pdf
+Name4[$e]=Turbo Car Care - Estimate for sunfilm.pdf
+Name5[$e]=Turbo Car Care - Estimate for Graphene.pdf
+Name6[$e]=Turbo Car Care - Ceramic & Graphene Coating.pdf
+Name7[$e]=BMW-X1-2017-Owners-Manual.pdf
+Name8[$e]=Spinny Max Owner Handbook.pdf
+Name9[$e]=BMW ICICI LOMBARD Policy_3001_392802533_00_000.pdf
 
 [UiSettings]
 ColorScheme=Kvantum
